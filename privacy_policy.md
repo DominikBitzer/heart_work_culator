@@ -57,7 +57,7 @@ I may update our Privacy Policy from time to time. Thus, you are advised to revi
 
 This policy is effective as of 2021-12-30
 
-**Deletion of Personal Identifiable Information **
+**Deletion of Personal Identifiable Information**
 
 In case you request to remove any Personal Identifiable Information, please contact me at dominik.bitzer@mailbox.org
 
