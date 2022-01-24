@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class HeartDataInput extends StatefulWidget {
   const HeartDataInput({Key? key}) : super(key: key);
 
@@ -10,6 +12,26 @@ class HeartDataInput extends StatefulWidget {
 
 class _HeartDataInputState extends State<HeartDataInput> {
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _checkIfTermsAccepted();
+  }
+
+  void _checkIfTermsAccepted() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      bool terms_have_been_accepted =
+          (prefs.getBool('terms_have_been_accepted') ?? false);
+      if (!terms_have_been_accepted) {
+        Navigator.pushNamed(
+          context,
+          '/show_and_accept_terms',
+        );
+      }
+    });
+  }
 
   late double input_1_preejection_period;
   late double input_2_systolic_period;
@@ -140,11 +162,46 @@ class _HeartDataInputState extends State<HeartDataInput> {
                   onChanged: (value) {
                     input_1_preejection_period = double.parse(value);
                   },
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     filled: true,
                     hintText: '(msec)',
                     labelText:
                         'Pre-ejection period left ventricular outflow tract',
+                    suffixIcon: IconButton(
+                      onPressed: () => showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text(
+                              'How to measure:'),
+                          content:
+
+
+                          InteractiveViewer(
+                            child: Padding(
+                              child: const Image(
+                                image: AssetImage('assets/five_chamber_view_app.png'),
+                              ),
+                              padding: const EdgeInsets.all(1.0),
+                            ),
+                          ),
+
+
+
+
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      icon: Icon(
+                        Icons.info,
+                        color: Colors.blue,
+                        size: 27.0,
+                      ),
+                    ),
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -161,11 +218,47 @@ class _HeartDataInputState extends State<HeartDataInput> {
                   onChanged: (value) {
                     input_2_systolic_period = double.parse(value);
                   },
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     filled: true,
                     hintText: '(msec)',
                     labelText:
                         'Total systolic period left ventricular outflow tract',
+
+
+                    suffixIcon: IconButton(
+                      onPressed: () => showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text(
+                              'How to measure:'),
+                          content:
+
+                          InteractiveViewer(
+                            child: Padding(
+                              child: const Image(
+                                image: AssetImage('assets/five_chamber_view_app.png'),
+                              ),
+                              padding: const EdgeInsets.all(1.0),
+                            ),
+                          ),
+
+
+
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      icon: Icon(
+                        Icons.info,
+                        color: Colors.blue,
+                        size: 27.0,
+                      ),
+                    ),
+
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
