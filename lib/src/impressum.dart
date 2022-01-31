@@ -5,14 +5,14 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ShowAndAcceptTerms extends StatefulWidget {
-  const ShowAndAcceptTerms({Key? key}) : super(key: key);
+class Impressum extends StatefulWidget {
+  const Impressum({Key? key}) : super(key: key);
 
   @override
-  _ShowAndAcceptTermsState createState() => _ShowAndAcceptTermsState();
+  _ImpressumState createState() => _ImpressumState();
 }
 
-class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
+class _ImpressumState extends State<Impressum> {
   final _formKey = GlobalKey<FormState>();
 
   bool? agreedToTerms = false;

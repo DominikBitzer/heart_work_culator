@@ -13,6 +13,14 @@ class HeartDataInput extends StatefulWidget {
 class _HeartDataInputState extends State<HeartDataInput> {
   final _formKey = GlobalKey<FormState>();
 
+  FocusNode _field1preejectionPeriodFocusNode = FocusNode();
+  FocusNode _field2TotalSystolicPeriodFocusNode = FocusNode();
+  FocusNode _field3EndSystolicVolumeFocusNode = FocusNode();
+  FocusNode _field4EndDiastolicVolumeFocusNode = FocusNode();
+  FocusNode _field5SystolicFocusNode = FocusNode();
+  FocusNode _field6DiastolicFocusNode = FocusNode();
+  FocusNode _field7HearRateFocusNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -138,6 +146,41 @@ class _HeartDataInputState extends State<HeartDataInput> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // drawer: Drawer(
+      //   // Add a ListView to the drawer. This ensures the user can scroll
+      //   // through the options in the drawer if there isn't enough vertical
+      //   // space to fit everything.
+      //   child: ListView(
+      //     // Important: Remove any padding from the ListView.
+      //     padding: EdgeInsets.zero,
+      //     children: [
+      //       const DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: Colors.green,
+      //         ),
+      //         child: Text('Menu'),
+      //       ),
+      //       ListTile(
+      //         title: const Text('Terms and conditions'),
+      //         onTap: () {
+      //           Navigator.pushNamed(
+      //             context,
+      //             '/show_and_accept_terms',
+      //           );
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('Impressum'),
+      //         onTap: () {
+      //           Navigator.pushNamed(
+      //             context,
+      //             '/impressum',
+      //           );
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // ),
       appBar: AppBar(
         title: const Text('Input of data'),
         actions: [
@@ -162,6 +205,11 @@ class _HeartDataInputState extends State<HeartDataInput> {
                   onChanged: (value) {
                     input_1_preejection_period = double.parse(value);
                   },
+                  focusNode: _field1preejectionPeriodFocusNode,
+                  onFieldSubmitted: (String val) {
+                    _field1preejectionPeriodFocusNode.unfocus();
+                    FocusScope.of(context).requestFocus(_field2TotalSystolicPeriodFocusNode);
+                  },
                   decoration: InputDecoration(
                     filled: true,
                     hintText: '(msec)',
@@ -172,7 +220,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                         context: context,
                         builder: (BuildContext context) => AlertDialog(
                           title: const Text(
-                              'How to measure:'),
+                              'Aortic Doppler waveform and the determination of pre-ejection and and total-systolic period'),
                           content:
 
 
@@ -217,6 +265,11 @@ class _HeartDataInputState extends State<HeartDataInput> {
                 TextFormField(
                   onChanged: (value) {
                     input_2_systolic_period = double.parse(value);
+                  },
+                  focusNode: _field2TotalSystolicPeriodFocusNode,
+                  onFieldSubmitted: (String val) {
+                    _field2TotalSystolicPeriodFocusNode.unfocus();
+                    FocusScope.of(context).requestFocus(_field3EndSystolicVolumeFocusNode);
                   },
                   decoration: InputDecoration(
                     filled: true,
@@ -275,6 +328,12 @@ class _HeartDataInputState extends State<HeartDataInput> {
                   onChanged: (value) {
                     input_3a_end_systolic_volume = double.parse(value);
                   },
+                  focusNode: _field3EndSystolicVolumeFocusNode,
+                  onFieldSubmitted: (String val) {
+                    _field3EndSystolicVolumeFocusNode.unfocus();
+                    FocusScope.of(context).requestFocus(_field4EndDiastolicVolumeFocusNode);
+                  },
+
                   decoration: const InputDecoration(
                     filled: true,
                     hintText: '(mL)',
@@ -294,6 +353,11 @@ class _HeartDataInputState extends State<HeartDataInput> {
                 TextFormField(
                   onChanged: (value) {
                     input_3b_end_diastolic_volume = double.parse(value);
+                  },
+                  focusNode: _field4EndDiastolicVolumeFocusNode,
+                  onFieldSubmitted: (String val) {
+                    _field4EndDiastolicVolumeFocusNode.unfocus();
+                    FocusScope.of(context).requestFocus(_field5SystolicFocusNode);
                   },
                   decoration: const InputDecoration(
                     filled: true,
@@ -320,10 +384,51 @@ class _HeartDataInputState extends State<HeartDataInput> {
                             input_4a_systolic_bloodpressure =
                                 double.parse(value);
                           },
-                          decoration: const InputDecoration(
+                          focusNode: _field5SystolicFocusNode,
+                          onFieldSubmitted: (String val) {
+                            _field5SystolicFocusNode.unfocus();
+                            FocusScope.of(context).requestFocus(_field6DiastolicFocusNode);
+                          },
+                          decoration: InputDecoration(
                             filled: true,
                             hintText: '(mmHg)',
                             labelText: 'Systolic blood pressure',
+
+                            suffixIcon: IconButton(
+                              onPressed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text(
+                                      'Notes about measuring blood pressure.'),
+                                  content:
+
+
+                                  InteractiveViewer(
+                                    child: Padding(
+                                      child: const Text("Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),
+                                      padding: const EdgeInsets.all(1.0),
+                                    ),
+                                  ),
+
+
+
+
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              icon: Icon(
+                                Icons.info,
+                                color: Colors.blue,
+                                size: 27.0,
+                              ),
+                            ),
+
+
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -344,10 +449,53 @@ class _HeartDataInputState extends State<HeartDataInput> {
                             input_4b_diastolic_bloodpressure =
                                 double.parse(value);
                           },
-                          decoration: const InputDecoration(
+                          focusNode: _field6DiastolicFocusNode,
+                          onFieldSubmitted: (String val) {
+                            _field6DiastolicFocusNode.unfocus();
+                            FocusScope.of(context).requestFocus(_field7HearRateFocusNode);
+                          },
+                          decoration: InputDecoration(
                             filled: true,
                             hintText: '(mmHg)',
                             labelText: 'Diastolic blood pressure',
+
+
+                            suffixIcon: IconButton(
+                              onPressed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text(
+                                      'Notes about measuring blood pressure.'),
+                                  content:
+
+
+                                  InteractiveViewer(
+                                    child: Padding(
+                                      child: const Text("Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),
+                                      padding: const EdgeInsets.all(1.0),
+                                    ),
+                                  ),
+
+
+
+
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              icon: Icon(
+                                Icons.info,
+                                color: Colors.blue,
+                                size: 27.0,
+                              ),
+                            ),
+
+
+
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -368,6 +516,11 @@ class _HeartDataInputState extends State<HeartDataInput> {
                   onChanged: (value) {
                     input_5_heartrate = double.parse(value);
                   },
+                  focusNode: _field7HearRateFocusNode,
+                  // onFieldSubmitted: (String val) {
+                  //   _field6DiastolicFocusNode.unfocus();
+                  //   FocusScope.of(context).requestFocus(_field7HearRateFocusNode);
+                  // },
                   decoration: const InputDecoration(
                     filled: true,
                     hintText: '(bpm)',
