@@ -93,7 +93,7 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
 
                             MarkdownBody(
                               data: "I agree to the terms of service  "
-                                  "\nand to the [privacy policy](https://github.com/DominikBitzer/heart_work_culator/blob/master/privacy_policy.md).",
+                                  "\nand to the [privacy policy](https://github.com/DominikBitzer/heart_work_culator/blob/master/assets/privacy_policy.md).",
                               onTapLink: (text, url, title) {
                                 launch(url!);
                               },
@@ -131,12 +131,29 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
                   void _incrementCounter() async {
                     final prefs = await SharedPreferences.getInstance();
                     setState(() {
+                      print(agreedToTerms.runtimeType);
+                      print(agreedToTerms);
+
                       prefs.setBool(
                           'terms_have_been_accepted', agreedToTerms ?? false);
                     });
                   }
 
-                  Navigator.pop(context);
+                  _incrementCounter();
+
+                  if (Navigator.canPop(context))
+                  {
+                    Navigator.pop(context);
+                  }
+                  else {
+                    Navigator.pushNamed(
+                      context,
+                      '/input_data',
+                    );
+
+                  }
+
+
                 },
                 style: TextButton.styleFrom(
                   primary: Colors.white,

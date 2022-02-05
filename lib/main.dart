@@ -17,9 +17,9 @@ class HeartWorkCulatorApp extends StatelessWidget {
     return MaterialApp(
       title: 'Heart-Work-Culator',
       theme: ThemeData(primarySwatch: Colors.green),
-      initialRoute: '/',
+      initialRoute: '/input_data',
       routes: {
-        '/': (context) => const HeartDataInput(),
+        '/input_data': (context) => const HeartDataInput(),
         '/show_and_accept_terms': (context) => const ShowAndAcceptTerms(),
         '/display_analysis': (context) => const DisplayOfAnalysis(),
         '/impressum': (context) => const Impressum(),
