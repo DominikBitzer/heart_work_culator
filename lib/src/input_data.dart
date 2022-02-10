@@ -194,362 +194,352 @@ class _HeartDataInputState extends State<HeartDataInput> {
           ),
         ],
       ),
-      body: Form(
-        key: _formKey,
-        child: Scrollbar(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                TextFormField(
-                  onChanged: (value) {
-                    input_1_preejection_period = double.parse(value);
-                  },
-                  focusNode: _field1preejectionPeriodFocusNode,
-                  onFieldSubmitted: (String val) {
-                    _field1preejectionPeriodFocusNode.unfocus();
-                    FocusScope.of(context).requestFocus(_field2TotalSystolicPeriodFocusNode);
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    hintText: '(msec)',
-                    labelText:
-                        'Pre-ejection period left ventricular outflow tract',
-                    suffixIcon: IconButton(
-                      onPressed: () => showDialog<String>(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text(
-                              'Aortic Doppler waveform and the determination of pre-ejection and and total-systolic period'),
-                          content:
 
-
-                          InteractiveViewer(
-                            child: Padding(
-                              child: const Image(
-                                image: AssetImage('assets/five_chamber_view_app.png'),
-                              ),
-                              padding: const EdgeInsets.all(1.0),
-                            ),
-                          ),
-
-
-
-
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      icon: Icon(
-                        Icons.info,
-                        color: Colors.blue,
-                        size: 27.0,
-                      ),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a value.';
-                    }
-                  },
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    input_2_systolic_period = double.parse(value);
-                  },
-                  focusNode: _field2TotalSystolicPeriodFocusNode,
-                  onFieldSubmitted: (String val) {
-                    _field2TotalSystolicPeriodFocusNode.unfocus();
-                    FocusScope.of(context).requestFocus(_field3EndSystolicVolumeFocusNode);
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    hintText: '(msec)',
-                    labelText:
-                        'Total systolic period left ventricular outflow tract',
-
-
-                    suffixIcon: IconButton(
-                      onPressed: () => showDialog<String>(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text(
-                              'How to measure:'),
-                          content:
-
-                          InteractiveViewer(
-                            child: Padding(
-                              child: const Image(
-                                image: AssetImage('assets/five_chamber_view_app.png'),
-                              ),
-                              padding: const EdgeInsets.all(1.0),
-                            ),
-                          ),
-
-
-
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      icon: Icon(
-                        Icons.info,
-                        color: Colors.blue,
-                        size: 27.0,
-                      ),
-                    ),
-
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a value.';
-                    }
-                  },
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    input_3a_end_systolic_volume = double.parse(value);
-                  },
-                  focusNode: _field3EndSystolicVolumeFocusNode,
-                  onFieldSubmitted: (String val) {
-                    _field3EndSystolicVolumeFocusNode.unfocus();
-                    FocusScope.of(context).requestFocus(_field4EndDiastolicVolumeFocusNode);
-                  },
-
-                  decoration: const InputDecoration(
-                    filled: true,
-                    hintText: '(mL)',
-                    labelText: 'End-systolic volume',
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a value.';
-                    }
-                  },
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    input_3b_end_diastolic_volume = double.parse(value);
-                  },
-                  focusNode: _field4EndDiastolicVolumeFocusNode,
-                  onFieldSubmitted: (String val) {
-                    _field4EndDiastolicVolumeFocusNode.unfocus();
-                    FocusScope.of(context).requestFocus(_field5SystolicFocusNode);
-                  },
-                  decoration: const InputDecoration(
-                    filled: true,
-                    hintText: '(mL)',
-                    labelText: 'End-diastolic volume',
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a value.';
-                    }
-                  },
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          onChanged: (value) {
-                            input_4a_systolic_bloodpressure =
-                                double.parse(value);
-                          },
-                          focusNode: _field5SystolicFocusNode,
-                          onFieldSubmitted: (String val) {
-                            _field5SystolicFocusNode.unfocus();
-                            FocusScope.of(context).requestFocus(_field6DiastolicFocusNode);
-                          },
-                          decoration: InputDecoration(
-                            filled: true,
-                            hintText: '(mmHg)',
-                            labelText: 'Systolic blood pressure',
-
-                            suffixIcon: IconButton(
-                              onPressed: () => showDialog<String>(
-                                context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                  title: const Text(
-                                      'Notes about measuring blood pressure.'),
-                                  content:
-
-
-                                  InteractiveViewer(
-                                    child: Padding(
-                                      child: const Text("Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),
-                                      padding: const EdgeInsets.all(1.0),
-                                    ),
+      body: Container(
+        child: Container(
+          // constraints: BoxConstraints(
+          //   // minHeight: 500, //minimum height
+          //   // minWidth: 300, // minimum width
+          //   //
+          //   // maxHeight: MediaQuery.of(context).size.height,
+          //   // //maximum height set to 100% of vertical height
+          //
+          //   maxWidth: 700,
+          //   //maximum width set to 100% of width
+          // ),
+          child: Form(
+            key: _formKey,
+            child: Scrollbar(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      onChanged: (value) {
+                        input_1_preejection_period = double.parse(value);
+                      },
+                      focusNode: _field1preejectionPeriodFocusNode,
+                      onFieldSubmitted: (String val) {
+                        _field1preejectionPeriodFocusNode.unfocus();
+                        FocusScope.of(context)
+                            .requestFocus(_field2TotalSystolicPeriodFocusNode);
+                      },
+                      decoration: InputDecoration(
+                        filled: true,
+                        hintText: '(msec)',
+                        labelText:
+                            'Pre-ejection period left ventricular outflow tract',
+                        suffixIcon: IconButton(
+                          onPressed: () => showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text(
+                                  'Aortic Doppler waveform and the determination of pre-ejection and and total-systolic period'),
+                              content: InteractiveViewer(
+                                child: Padding(
+                                  child: const Image(
+                                    image: AssetImage(
+                                        'assets/five_chamber_view_app.png'),
                                   ),
-
-
-
-
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context, 'OK'),
-                                      child: const Text('OK'),
-                                    ),
-                                  ],
+                                  padding: const EdgeInsets.all(1.0),
                                 ),
                               ),
-                              icon: Icon(
-                                Icons.info,
-                                color: Colors.blue,
-                                size: 27.0,
-                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
                             ),
-
-
                           ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a value.';
-                            }
-                          },
-                          keyboardType: TextInputType.number,
-                          textInputAction: TextInputAction.next,
+                          icon: Icon(
+                            Icons.info,
+                            color: Colors.blue,
+                            size: 27.0,
+                          ),
                         ),
                       ),
-                      Text(
-                        ' / ',
-                        style: const TextStyle(fontSize: 30),
-                      ),
-                      Expanded(
-                        child: TextFormField(
-                          onChanged: (value) {
-                            input_4b_diastolic_bloodpressure =
-                                double.parse(value);
-                          },
-                          focusNode: _field6DiastolicFocusNode,
-                          onFieldSubmitted: (String val) {
-                            _field6DiastolicFocusNode.unfocus();
-                            FocusScope.of(context).requestFocus(_field7HearRateFocusNode);
-                          },
-                          decoration: InputDecoration(
-                            filled: true,
-                            hintText: '(mmHg)',
-                            labelText: 'Diastolic blood pressure',
-
-
-                            suffixIcon: IconButton(
-                              onPressed: () => showDialog<String>(
-                                context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                  title: const Text(
-                                      'Notes about measuring blood pressure.'),
-                                  content:
-
-
-                                  InteractiveViewer(
-                                    child: Padding(
-                                      child: const Text("Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),
-                                      padding: const EdgeInsets.all(1.0),
-                                    ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a value.';
+                        }
+                      },
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    TextFormField(
+                      onChanged: (value) {
+                        input_2_systolic_period = double.parse(value);
+                      },
+                      focusNode: _field2TotalSystolicPeriodFocusNode,
+                      onFieldSubmitted: (String val) {
+                        _field2TotalSystolicPeriodFocusNode.unfocus();
+                        FocusScope.of(context)
+                            .requestFocus(_field3EndSystolicVolumeFocusNode);
+                      },
+                      decoration: InputDecoration(
+                        filled: true,
+                        hintText: '(msec)',
+                        labelText:
+                            'Total systolic period left ventricular outflow tract',
+                        suffixIcon: IconButton(
+                          onPressed: () => showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('How to measure:'),
+                              content: InteractiveViewer(
+                                child: Padding(
+                                  child: const Image(
+                                    image: AssetImage(
+                                        'assets/five_chamber_view_app.png'),
                                   ),
-
-
-
-
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context, 'OK'),
-                                      child: const Text('OK'),
-                                    ),
-                                  ],
+                                  padding: const EdgeInsets.all(1.0),
                                 ),
                               ),
-                              icon: Icon(
-                                Icons.info,
-                                color: Colors.blue,
-                                size: 27.0,
-                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
                             ),
-
-
-
                           ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a value.';
-                            }
-                          },
-                          keyboardType: TextInputType.number,
-                          textInputAction: TextInputAction.next,
+                          icon: Icon(
+                            Icons.info,
+                            color: Colors.blue,
+                            size: 27.0,
+                          ),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a value.';
+                        }
+                      },
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    TextFormField(
+                      onChanged: (value) {
+                        input_3a_end_systolic_volume = double.parse(value);
+                      },
+                      focusNode: _field3EndSystolicVolumeFocusNode,
+                      onFieldSubmitted: (String val) {
+                        _field3EndSystolicVolumeFocusNode.unfocus();
+                        FocusScope.of(context)
+                            .requestFocus(_field4EndDiastolicVolumeFocusNode);
+                      },
+                      decoration: const InputDecoration(
+                        filled: true,
+                        hintText: '(mL)',
+                        labelText: 'End-systolic volume',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a value.';
+                        }
+                      },
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    TextFormField(
+                      onChanged: (value) {
+                        input_3b_end_diastolic_volume = double.parse(value);
+                      },
+                      focusNode: _field4EndDiastolicVolumeFocusNode,
+                      onFieldSubmitted: (String val) {
+                        _field4EndDiastolicVolumeFocusNode.unfocus();
+                        FocusScope.of(context)
+                            .requestFocus(_field5SystolicFocusNode);
+                      },
+                      decoration: const InputDecoration(
+                        filled: true,
+                        hintText: '(mL)',
+                        labelText: 'End-diastolic volume',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a value.';
+                        }
+                      },
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    SizedBox(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              onChanged: (value) {
+                                input_4a_systolic_bloodpressure =
+                                    double.parse(value);
+                              },
+                              focusNode: _field5SystolicFocusNode,
+                              onFieldSubmitted: (String val) {
+                                _field5SystolicFocusNode.unfocus();
+                                FocusScope.of(context)
+                                    .requestFocus(_field6DiastolicFocusNode);
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                hintText: '(mmHg)',
+                                labelText: 'Systolic blood pressure',
+                                suffixIcon: IconButton(
+                                  onPressed: () => showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title: const Text(
+                                          'Notes about measuring blood pressure.'),
+                                      content: InteractiveViewer(
+                                        child: Padding(
+                                          child: const Text(
+                                              "Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),
+                                          padding: const EdgeInsets.all(1.0),
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'OK'),
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  icon: Icon(
+                                    Icons.info,
+                                    color: Colors.blue,
+                                    size: 27.0,
+                                  ),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter a value.';
+                                }
+                              },
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.next,
+                            ),
+                          ),
+                          Text(
+                            ' / ',
+                            style: const TextStyle(fontSize: 30),
+                          ),
+                          Expanded(
+                            child: TextFormField(
+                              onChanged: (value) {
+                                input_4b_diastolic_bloodpressure =
+                                    double.parse(value);
+                              },
+                              focusNode: _field6DiastolicFocusNode,
+                              onFieldSubmitted: (String val) {
+                                _field6DiastolicFocusNode.unfocus();
+                                FocusScope.of(context)
+                                    .requestFocus(_field7HearRateFocusNode);
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                hintText: '(mmHg)',
+                                labelText: 'Diastolic blood pressure',
+                                suffixIcon: IconButton(
+                                  onPressed: () => showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title: const Text(
+                                          'Notes about measuring blood pressure.'),
+                                      content: InteractiveViewer(
+                                        child: Padding(
+                                          child: const Text(
+                                              "Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),
+                                          padding: const EdgeInsets.all(1.0),
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'OK'),
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  icon: Icon(
+                                    Icons.info,
+                                    color: Colors.blue,
+                                    size: 27.0,
+                                  ),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter a value.';
+                                }
+                              },
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.next,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    TextFormField(
+                      onChanged: (value) {
+                        input_5_heartrate = double.parse(value);
+                      },
+                      focusNode: _field7HearRateFocusNode,
+                      // onFieldSubmitted: (String val) {
+                      //   _field6DiastolicFocusNode.unfocus();
+                      //   FocusScope.of(context).requestFocus(_field7HearRateFocusNode);
+                      // },
+                      decoration: const InputDecoration(
+                        filled: true,
+                        hintText: '(bpm)',
+                        labelText: 'Heart rate',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a value.';
+                        }
+                      },
+                      keyboardType: TextInputType.number,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        calculate_And_Display_Results();
+                      },
+                      style: TextButton.styleFrom(
+                        primary: Colors.white,
+                        backgroundColor: Colors.green,
+                      ),
+                      child: const Text('Analyze'),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
-                TextFormField(
-                  onChanged: (value) {
-                    input_5_heartrate = double.parse(value);
-                  },
-                  focusNode: _field7HearRateFocusNode,
-                  // onFieldSubmitted: (String val) {
-                  //   _field6DiastolicFocusNode.unfocus();
-                  //   FocusScope.of(context).requestFocus(_field7HearRateFocusNode);
-                  // },
-                  decoration: const InputDecoration(
-                    filled: true,
-                    hintText: '(bpm)',
-                    labelText: 'Heart rate',
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a value.';
-                    }
-                  },
-                  keyboardType: TextInputType.number,
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    calculate_And_Display_Results();
-                  },
-                  style: TextButton.styleFrom(
-                    primary: Colors.white,
-                    backgroundColor: Colors.green,
-                  ),
-                  child: const Text('Analyze'),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-              ],
+              ),
             ),
           ),
         ),

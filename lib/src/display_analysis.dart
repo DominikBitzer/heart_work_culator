@@ -9,9 +9,10 @@ class DisplayOfAnalysis extends StatelessWidget {
     final calculatedResults =
         ModalRoute.of(context)!.settings.arguments as Map<String, double>;
 
-    double Work_efficiency_in_percent = 100*calculatedResults['Work_efficiency']!;
-    String Work_efficiency_in_percent_string = Work_efficiency_in_percent.toStringAsFixed(0) + "%";
-
+    double Work_efficiency_in_percent =
+        100 * calculatedResults['Work_efficiency']!;
+    String Work_efficiency_in_percent_string =
+        Work_efficiency_in_percent.toStringAsFixed(0) + "%";
 
     return Scaffold(
       appBar: AppBar(
@@ -135,7 +136,7 @@ class DisplayOfAnalysis extends StatelessWidget {
                             child: Text(Work_efficiency_in_percent_string
                                 // calculatedResults['Work_efficiency']!
                                 // .toStringAsFixed(2)
-                            ),
+                                ),
                             padding: const EdgeInsets.all(6.0),
                           ),
                         ]),
@@ -185,232 +186,214 @@ class DisplayOfAnalysis extends StatelessWidget {
                                     child: SingleChildScrollView(
                                       // child: Text(
 
-                                      child:
-
-                                      Table(
-                                        columnWidths: const <int, TableColumnWidth>{
+                                      child: Table(
+                                        columnWidths: const <int,
+                                            TableColumnWidth>{
                                           0: FixedColumnWidth(70),
                                           1: FlexColumnWidth(),
                                         },
                                         children: [
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "A"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("A"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
-                                              child: Text(
-                                                  "ESV/0 mmHg"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
-                                            ),
-                                          ]),
-
-                                          TableRow(children: [
-                                            Padding(
-                                              child: Text(
-                                                  "B"),
-                                              padding: const EdgeInsets.all(6.0),
-                                            ),
-                                            Padding(
-                                              child: Text(
-                                                  "EDV/0 mmHg"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("ESV/0 mmHg"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "C"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("B"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
-                                              child: Text(
-                                                  "EDV/Pes"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("EDV/0 mmHg"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "D"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("C"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
-                                              child: Text(
-                                                  "ESV/Pes"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("EDV/Pes"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "Pes"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("D"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
-                                              child: Text(
-                                                  "End-systolic blood pressure"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("ESV/Pes"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "A–B"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("Pes"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
                                               child: Text(
-                                                  "Diastolic filling"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                                  "End-systolic blood pressure"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "B–C"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("A–B"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
-                                              child: Text(
-                                                  "Isovolumic contraction"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("Diastolic filling"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "C–D"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("B–C"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
                                               child: Text(
-                                                  "Ejection"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                                  "Isovolumic contraction"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "D–A"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("C–D"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
-                                              child: Text(
-                                                  "Isovolumic relaxation"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("Ejection"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "ESPVR"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("D–A"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
-                                              child: Text(
-                                                  "End-systolic pressure–volume relation"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child:
+                                                  Text("Isovolumic relaxation"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "Ees(sb)"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("ESPVR"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
                                               child: Text(
-                                                  "Left ventricular end-systolic elastance"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                                  "End-systolic pressure–volume relation"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "V0"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("Ees(sb)"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
                                               child: Text(
-                                                  "Intersection ESPVR and x-axis"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                                  "Left ventricular end-systolic elastance"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "Ea"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("V0"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
                                               child: Text(
-                                                  "Arterial elastance"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                                  "Intersection ESPVR and x-axis"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "Epot"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("Ea"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
-                                              child: Text(
-                                                  "Potential energy"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("Arterial elastance"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "SW"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("Epot"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
-                                              child: Text(
-                                                  "Stroke work"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("Potential energy"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
-
                                           TableRow(children: [
                                             Padding(
-                                              child: Text(
-                                                  "PVA"),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("SW"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                             Padding(
-                                              child: Text(
-                                                  "Pressure–volume area"
-                                              ),
-                                              padding: const EdgeInsets.all(6.0),
+                                              child: Text("Stroke work"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
                                             ),
                                           ]),
-
-
+                                          TableRow(children: [
+                                            Padding(
+                                              child: Text("PVA"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
+                                            ),
+                                            Padding(
+                                              child:
+                                                  Text("Pressure–volume area"),
+                                              padding:
+                                                  const EdgeInsets.all(6.0),
+                                            ),
+                                          ]),
                                         ],
                                       ),
-
-
-
-
 
                                       // const MarkdownBody(
                                       //   data:
@@ -435,16 +418,24 @@ class DisplayOfAnalysis extends StatelessWidget {
                                       //       "**SW**    \t(Stroke work)  \n"
                                       //       "**PVA**    \t(Pressure–volume area)  \n",
 
-                                        // style: TextStyle(
-                                        //     height: 1.2
-                                        // ),
+                                      // style: TextStyle(
+                                      //     height: 1.2
+                                      // ),
                                       // ),
                                     ),
                                   ),
                                   actions: <Widget>[
                                     TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context, 'OK'),
+                                      onPressed: () {
+                                        if (Navigator.canPop(context)) {
+                                          Navigator.pop(context, 'OK');
+                                        } else {
+                                          Navigator.pushNamed(
+                                            context,
+                                            '/input_data',
+                                          );
+                                        }
+                                      },
                                       child: const Text('OK'),
                                     ),
                                   ],

@@ -51,7 +51,7 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
                   child: SingleChildScrollView(
                     padding: EdgeInsets.all(16),
                     child: MarkdownBody(
-                      data: privacy_policy,
+                      data: terms_of_service,
                       onTapLink: (text, url, title) {
                         launch(url!);
                       },
@@ -60,7 +60,7 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
                 ),
               ),
               const SizedBox(
-                height: 5,
+                height: 10,
               ),
               SizedBox(
                 height: 65,
@@ -95,7 +95,15 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
                               data: "I agree to the terms of service  "
                                   "\nand to the [privacy policy](https://github.com/DominikBitzer/heart_work_culator/blob/master/assets/privacy_policy.md).",
                               onTapLink: (text, url, title) {
-                                launch(url!);
+
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/privacy_policy',
+                                  );
+
+
+
+                                // launch(url!);
                               },
                             ),
 
