@@ -92,8 +92,8 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
                             ),
 
                             MarkdownBody(
-                              data: "I agree to the terms of service  "
-                                  "\nand to the [privacy policy](https://github.com/DominikBitzer/heart_work_culator/blob/master/assets/privacy_policy.md).",
+                              data: "I agree to the terms of service "
+                                  "and to the [privacy\u{00A0}policy](https://github.com/DominikBitzer/heart_work_culator/blob/master/assets/privacy_policy.md).",
                               onTapLink: (text, url, title) {
 
                                   Navigator.pushNamed(

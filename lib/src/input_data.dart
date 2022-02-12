@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'dart:math';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -614,6 +615,24 @@ class _HeartDataInputState extends State<HeartDataInput> {
                     const SizedBox(
                       height: 25,
                     ),
+
+                    Container
+
+                    (              alignment: Alignment.bottomLeft,child:MarkdownBody(
+                      data: "[Privacy\u{00A0}policy](https://github.com/DominikBitzer/heart_work_culator/blob/master/assets/privacy_policy.md)",
+                      onTapLink: (text, url, title) {
+
+                        Navigator.pushNamed(
+                          context,
+                          '/privacy_policy',
+                        );
+
+
+
+                        // launch(url!);
+                      },
+                    ),
+)
                   ],
                 ),
               ),
