@@ -18,8 +18,27 @@ class DisplayOfAnalysis extends StatelessWidget {
       appBar: AppBar(
         title: Text("Analysis of data"),
       ),
-      body: Container(
-        child: Center(
+      body: Center(
+        child: Container(
+
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 5,
+                blurRadius: 5,
+                offset: Offset(0, 7), // changes position of shadow
+              ),
+            ],
+            color: Theme.of(context).scaffoldBackgroundColor,
+
+          ),
+
+          alignment: Alignment.topCenter,
+          constraints: BoxConstraints(
+            maxWidth: 700,
+          ),
+
           child: Scrollbar(
             child: SingleChildScrollView(
               child: Column(
@@ -40,123 +59,372 @@ class DisplayOfAnalysis extends StatelessWidget {
                     child: Table(
                       columnWidths: const <int, TableColumnWidth>{
                         0: FlexColumnWidth(),
-                        1: FixedColumnWidth(80),
+                        1: FixedColumnWidth(70),
+                        2: FixedColumnWidth(40),
                       },
                       children: [
                         TableRow(children: [
-                          Padding(
-                            child: Text(
-                                "Left ventricular end-systolic elastance \n(E_es_sb, mmHg/mL):"),
-                            padding: const EdgeInsets.all(6.0),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  "Left ventricular end-systolic elastance (E_es_sb,\u{00A0}mmHg/mL):"),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  calculatedResults['E_es_sb']!
+                                      .toStringAsFixed(2),
+                                  textAlign: TextAlign.end),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
                           ),
                           Padding(
-                            child: Text(calculatedResults['E_es_sb']!
-                                .toStringAsFixed(2)),
-                            padding: const EdgeInsets.all(6.0),
-                          ),
-                        ]),
-                        TableRow(children: [
-                          Padding(
-                            child: Text("Arterial elastance \n(Ea, mmHg/mL):"),
-                            padding: const EdgeInsets.all(6.0),
-                          ),
-                          Padding(
-                            child: Text(
-                                calculatedResults['Ea_arterial_elastance']!
-                                    .toStringAsFixed(2)),
-                            padding: const EdgeInsets.all(6.0),
-                          ),
-                        ]),
-                        TableRow(children: [
-                          Padding(
-                            child: Text(
-                                "Ventricular arterial coupling \n(Ea/E_es_sb):"),
-                            padding: const EdgeInsets.all(6.0),
-                          ),
-                          Padding(
-                            child: Text(calculatedResults[
-                                    'VAC_ventricular_arterial_coupling']!
-                                .toStringAsFixed(2)),
                             padding: const EdgeInsets.all(6.0),
                           ),
                         ]),
                         TableRow(children: [
-                          Padding(
-                            child: Text("Potential energy \n(Epot, mmHg*mL):"),
-                            padding: const EdgeInsets.all(6.0),
+                          const TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child:
+                                  Text("Arterial elastance (Ea,\u{00A0}mmHg\u{2060}/\u{2060}mL):"),
+                              padding: EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  calculatedResults['Ea_arterial_elastance']!
+                                      .toStringAsFixed(2),
+                                  textAlign: TextAlign.end),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
                           ),
                           Padding(
-                            child: Text(
-                                calculatedResults['Epot']!.toStringAsFixed(0)),
-                            padding: const EdgeInsets.all(6.0),
-                          ),
-                        ]),
-                        TableRow(children: [
-                          Padding(
-                            child: Text("Stroke work \n(SW, mmHg*mL):"),
-                            padding: const EdgeInsets.all(6.0),
-                          ),
-                          Padding(
-                            child: Text(calculatedResults['SW_stroke_work']!
-                                .toStringAsFixed(0)),
-                            padding: const EdgeInsets.all(6.0),
-                          ),
-                        ]),
-                        TableRow(children: [
-                          Padding(
-                            child:
-                                Text("Pressure–volume area \n(PVA, mmHg*mL):"),
-                            padding: const EdgeInsets.all(6.0),
-                          ),
-                          Padding(
-                            child: Text(
-                                calculatedResults['PVA_Pressure_volume_area']!
-                                    .toStringAsFixed(0)),
                             padding: const EdgeInsets.all(6.0),
                           ),
                         ]),
                         TableRow(children: [
-                          Padding(
-                            child: Text(
-                                "Cardiac work \n(CW, mmHg*mL*Heart Rate):"),
-                            padding: const EdgeInsets.all(6.0),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  "Ventricular arterial coupling (Ea\u{2060}/\u{2060}E_es_sb):"),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  calculatedResults[
+                                          'VAC_ventricular_arterial_coupling']!
+                                      .toStringAsFixed(2),
+                                  textAlign: TextAlign.end),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
                           ),
                           Padding(
-                            child: Text(calculatedResults['CW_cardiac_work']!
-                                .toStringAsFixed(0)),
                             padding: const EdgeInsets.all(6.0),
                           ),
                         ]),
                         TableRow(children: [
-                          Padding(
-                            child: Text("Work efficiency \n(SW/PVA):"),
-                            padding: const EdgeInsets.all(6.0),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child:
+                                  Text("Potential energy (Epot,\u{00A0}mmHg*mL):"),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  calculatedResults['Epot']!.toStringAsFixed(0),
+                                  textAlign: TextAlign.end),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
                           ),
                           Padding(
-                            child: Text(Work_efficiency_in_percent_string
-                                // calculatedResults['Work_efficiency']!
-                                // .toStringAsFixed(2)
+                            child: IconButton(
+                              onPressed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Potential energy:'),
+                                  content: Text(
+                                      "Energy that is not actively engaged in left ventricular ejection."),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
                                 ),
-                            padding: const EdgeInsets.all(6.0),
+                              ),
+                              icon: Icon(
+                                Icons.info,
+                                color: Colors.blue,
+                                size: 27.0,
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(0.0),
                           ),
                         ]),
                         TableRow(children: [
-                          Padding(
-                            child: Text(
-                                "Cardiac efficiency \n(PVA/Stroke Volume, mmHg):"),
-                            padding: const EdgeInsets.all(6.0),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text("Stroke work (SW,\u{00A0}mmHg*mL):"),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  calculatedResults['SW_stroke_work']!
+                                      .toStringAsFixed(0),
+                                  textAlign: TextAlign.end),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
                           ),
                           Padding(
-                            child: Text(calculatedResults[
-                                    'reciprocal_cardiac_efficiency']!
-                                .toStringAsFixed(0)),
-                            padding: const EdgeInsets.all(6.0),
+                            child: IconButton(
+                              onPressed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Stroke work:'),
+                                  content: Text(
+                                      "Effective external work carried out by the left ventricle."),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              icon: Icon(
+                                Icons.info,
+                                color: Colors.blue,
+                                size: 27.0,
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(0.0),
+                          ),
+                        ]),
+                        TableRow(children: [
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  "Pressure–volume area (PVA,\u{00A0}mmHg*mL):"),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  calculatedResults['PVA_Pressure_volume_area']!
+                                      .toStringAsFixed(0),
+                                  textAlign: TextAlign.end),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          Padding(
+                            child: IconButton(
+                              onPressed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Pressure–volume area:'),
+                                  content: Text(
+                                      "Total mechanical energy carried out by the left ventricle."),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              icon: Icon(
+                                Icons.info,
+                                color: Colors.blue,
+                                size: 27.0,
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(0.0),
+                          ),
+                        ]),
+                        TableRow(children: [
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  "Cardiac work (CW,\u{00A0}mmHg*mL*Heart Rate):"),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  calculatedResults['CW_cardiac_work']!
+                                      .toStringAsFixed(0),
+                                  textAlign: TextAlign.end),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          Padding(
+                            child: IconButton(
+                              onPressed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Cardiac work:'),
+                                  content: Text(
+                                      "Effective external work carried out by the left ventricle over one minute."),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              icon: Icon(
+                                Icons.info,
+                                color: Colors.blue,
+                                size: 27.0,
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(0.0),
+                          ),
+                        ]),
+                        TableRow(children: [
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text("Work efficiency (SW\u{2060}/\u{2060}PVA):"),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(Work_efficiency_in_percent_string,
+                                  textAlign: TextAlign.end
+                                  // calculatedResults['Work_efficiency']!
+                                  // .toStringAsFixed(2)
+                                  ),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          Padding(
+                            child: IconButton(
+                              onPressed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Work efficiency:'),
+                                  content: Text(
+                                      "Efficiency of energy transfer from the left ventricle to the arterial system."),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              icon: Icon(
+                                Icons.info,
+                                color: Colors.blue,
+                                size: 27.0,
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(0.0),
+                          ),
+                        ]),
+                        TableRow(children: [
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  "Cardiac efficiency (PVA\u{2060}/\u{2060}Stroke\u{00A0}Volume,\u{00A0}mmHg):"),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          TableCell(
+                            verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            child: Padding(
+                              child: Text(
+                                  calculatedResults[
+                                          'reciprocal_cardiac_efficiency']!
+                                      .toStringAsFixed(0),
+                                  textAlign: TextAlign.end),
+                              padding: const EdgeInsets.all(6.0),
+                            ),
+                          ),
+                          Padding(
+                            child: IconButton(
+                              onPressed: () => showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Cardiac efficiency:'),
+                                  content: Text(
+                                      "Total mechanical energy required to generate one milliliter of left ventricular stroke volume."),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              icon: Icon(
+                                Icons.info,
+                                color: Colors.blue,
+                                size: 27.0,
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(0.0),
                           ),
                         ]),
                       ],
                     ),
                   ),
                   InteractiveViewer(
+                    maxScale: 1.9,
                     child: Padding(
                       child: const Image(
                         image: AssetImage('assets/pvl_diagram.png'),
@@ -174,7 +442,7 @@ class DisplayOfAnalysis extends StatelessWidget {
                             Expanded(
                               child: MarkdownBody(
                                   data:
-                                      "**Fig. 1**: Non-invasive left ventricular pressure–volume loop"),
+                                      "**Fig.\u{00A0}1**: Non-invasive left ventricular pressure–volume loop"),
                             ),
                             IconButton(
                               onPressed: () => showDialog<String>(

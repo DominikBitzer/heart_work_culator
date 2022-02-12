@@ -181,6 +181,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
       //     ],
       //   ),
       // ),
+      // backgroundColor: const Color(0x25bababa),
       appBar: AppBar(
         title: const Text('Input of data'),
         actions: [
@@ -195,18 +196,25 @@ class _HeartDataInputState extends State<HeartDataInput> {
         ],
       ),
 
-      body: Container(
-        child: Container(
-          // constraints: BoxConstraints(
-          //   // minHeight: 500, //minimum height
-          //   // minWidth: 300, // minimum width
-          //   //
-          //   // maxHeight: MediaQuery.of(context).size.height,
-          //   // //maximum height set to 100% of vertical height
-          //
-          //   maxWidth: 700,
-          //   //maximum width set to 100% of width
-          // ),
+      body: Center(
+        child:Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 5,
+                blurRadius: 5,
+                offset: Offset(0, 7), // changes position of shadow
+              ),
+            ],
+            color: Theme.of(context).scaffoldBackgroundColor,
+
+          ),
+
+          alignment: Alignment.topCenter,
+          constraints: BoxConstraints(
+            maxWidth: 700,
+          ),
           child: Form(
             key: _formKey,
             child: Scrollbar(
@@ -236,6 +244,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                               title: const Text(
                                   'Aortic Doppler waveform and the determination of pre-ejection and and total-systolic period'),
                               content: InteractiveViewer(
+                                maxScale: 1.9,
                                 child: Padding(
                                   child: const Image(
                                     image: AssetImage(
@@ -291,6 +300,8 @@ class _HeartDataInputState extends State<HeartDataInput> {
                             builder: (BuildContext context) => AlertDialog(
                               title: const Text('How to measure:'),
                               content: InteractiveViewer(
+                                maxScale: 1.9,
+
                                 child: Padding(
                                   child: const Image(
                                     image: AssetImage(
@@ -335,10 +346,41 @@ class _HeartDataInputState extends State<HeartDataInput> {
                         FocusScope.of(context)
                             .requestFocus(_field4EndDiastolicVolumeFocusNode);
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         filled: true,
                         hintText: '(mL)',
                         labelText: 'End-systolic volume',
+                        suffixIcon: IconButton(
+                          onPressed: () => showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text(
+                                  'Left ventricular end-systolic (LV ESV) and end-diastolic volume (LV EDV) should be assessed in apical four chamber view.'),
+                              content: InteractiveViewer(                    maxScale: 1.9,
+
+                                child: Padding(
+                                  child: const Image(
+                                    image: AssetImage(
+                                        'assets/LV_EDV_ESV_infobox.png'),
+                                  ),
+                                  padding: const EdgeInsets.all(1.0),
+                                ),
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          icon: Icon(
+                            Icons.info,
+                            color: Colors.blue,
+                            size: 27.0,
+                          ),
+                        ),
+
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -361,10 +403,43 @@ class _HeartDataInputState extends State<HeartDataInput> {
                         FocusScope.of(context)
                             .requestFocus(_field5SystolicFocusNode);
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         filled: true,
                         hintText: '(mL)',
                         labelText: 'End-diastolic volume',
+
+                        suffixIcon: IconButton(
+                          onPressed: () => showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text(
+                                  'Left ventricular end-systolic (LV ESV) and end-diastolic volume (LV EDV) should be assessed in apical four chamber view.'),
+                              content: InteractiveViewer(                    maxScale: 1.9,
+
+                                child: const Padding(
+                                  child: Image(
+                                    image: AssetImage(
+                                        'assets/LV_EDV_ESV_infobox.png'),
+                                  ),
+                                  padding: EdgeInsets.all(1.0),
+                                ),
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          icon: Icon(
+                            Icons.info,
+                            color: Colors.blue,
+                            size: 27.0,
+                          ),
+                        ),
+
+
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -403,7 +478,8 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                         AlertDialog(
                                       title: const Text(
                                           'Notes about measuring blood pressure.'),
-                                      content: InteractiveViewer(
+                                      content: InteractiveViewer(                    maxScale: 1.9,
+
                                         child: Padding(
                                           child: const Text(
                                               "Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),
@@ -462,7 +538,8 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                         AlertDialog(
                                       title: const Text(
                                           'Notes about measuring blood pressure.'),
-                                      content: InteractiveViewer(
+                                      content: InteractiveViewer(                    maxScale: 1.9,
+
                                         child: Padding(
                                           child: const Text(
                                               "Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),

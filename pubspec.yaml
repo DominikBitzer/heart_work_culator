@@ -1,5 +1,5 @@
 name: heart_work_culator
-description: Application for calculating pressure volume loop parameters.
+description: Application for generation of non-invasive left ventricular pressure-volume loops. To carry out the analysis, parameters assessed through echocardiography and simultaneous blood pressure measurement are needed. As a result this app provides detailled efficiency parameters of the left ventricle.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 2.0.0+2
+version: 3.0.0+3
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -69,6 +69,7 @@ flutter:
   assets:
     - assets/pvl_diagram.png
     - assets/five_chamber_view_app.png
+    - assets/LV_EDV_ESV_infobox.png
     - privacy_policy.md
     - terms_of_service.md
 
