@@ -69,7 +69,7 @@ class _ShowPrivacyPolicyState extends State<ShowPrivacyPolicy> {
                   else {
                     Navigator.pushNamed(
                       context,
-                      '/show_and_accept_terms',
+                      '/welcome_disclaimer',
                     );
 
                   }

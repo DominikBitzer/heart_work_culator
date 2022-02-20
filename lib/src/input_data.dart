@@ -36,7 +36,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
       if (!terms_have_been_accepted) {
         Navigator.pushNamed(
           context,
-          '/show_and_accept_terms',
+          '/welcome_disclaimer',
         );
       }
     });
@@ -166,7 +166,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
       //         onTap: () {
       //           Navigator.pushNamed(
       //             context,
-      //             '/show_and_accept_terms',
+      //             '/welcome_disclaimer',
       //           );
       //         },
       //       ),

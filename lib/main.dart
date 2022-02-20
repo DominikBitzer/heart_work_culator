@@ -21,7 +21,7 @@ class HeartWorkCulatorApp extends StatelessWidget {
       initialRoute: '/input_data',
       routes: {
         '/input_data': (context) => const HeartDataInput(),
-        '/show_and_accept_terms': (context) => const ShowAndAcceptTerms(),
+        '/welcome_disclaimer': (context) => const ShowAndAcceptTerms(),
         '/privacy_policy': (context) => const ShowPrivacyPolicy(),
         '/display_analysis': (context) => const DisplayOfAnalysis(),
         '/impressum': (context) => const Impressum(),
