@@ -71,8 +71,8 @@ class _HeartDataInputState extends State<HeartDataInput> {
     double temp_e_nd_sum = 0.0;
     double quotient_preejection_durch_totalsystolic =
         input_1_preejection_period / input_2_systolic_period;
-    for (int i = 1; i <= 7; i++) {
-      temp_e_nd_sum += array_ai_fixed_values[i - 1] *
+    for (int i = 0; i <= 7; i++) {
+      temp_e_nd_sum += array_ai_fixed_values[i] *
           pow(quotient_preejection_durch_totalsystolic, i);
     }
     calculatedResults["E_Nd(avg)"] = temp_e_nd_sum;
