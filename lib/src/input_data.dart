@@ -189,7 +189,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
           Padding(
             padding: const EdgeInsets.all(8),
             child: TextButton(
-              style: TextButton.styleFrom(primary: Colors.white),
+              style: TextButton.styleFrom(foregroundColor: Colors.white),
               onPressed: calculate_And_Display_Results,
               child: const Text('Analyze'),
             ),
@@ -607,7 +607,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                         calculate_And_Display_Results();
                       },
                       style: TextButton.styleFrom(
-                        primary: Colors.white,
+                        foregroundColor: Colors.white,
                         backgroundColor: Colors.green,
                       ),
                       child: const Text('Analyze'),
