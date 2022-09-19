@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:heart_work_culator/src/TUM_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -164,8 +165,8 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
 
                 },
                 style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  backgroundColor: Palette.tum_color_swatch,
                 ),
                 child: const Text('Agree and confirm'),
               ),

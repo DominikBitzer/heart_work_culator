@@ -5,6 +5,7 @@ import 'src/display_analysis.dart';
 import 'src/show_and_accept_terms.dart';
 import 'src/impressum.dart';
 import 'src/privacy_policy_page.dart';
+import 'src/tum_colors.dart';
 
 void main() {
   runApp(const HeartWorkCulatorApp());
@@ -17,7 +18,7 @@ class HeartWorkCulatorApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Heart-Work-Culator',
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(primarySwatch: Palette.tum_color_swatch),
       initialRoute: '/input_data',
       routes: {
         '/input_data': (context) => const HeartDataInput(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'TUM_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,7 +79,7 @@ class _ShowPrivacyPolicyState extends State<ShowPrivacyPolicy> {
                 },
                 style: TextButton.styleFrom(
                   primary: Colors.white,
-                  backgroundColor: Colors.green,
+                  backgroundColor: Palette.tum_color_swatch,
                 ),
                 child: const Text('Back'),
               ),
