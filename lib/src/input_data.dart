@@ -200,7 +200,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
       ),
 
       body: Center(
-        child:Container(
+        child: Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -211,9 +211,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
               ),
             ],
             color: Theme.of(context).scaffoldBackgroundColor,
-
           ),
-
           alignment: Alignment.topCenter,
           constraints: BoxConstraints(
             maxWidth: 700,
@@ -227,9 +225,12 @@ class _HeartDataInputState extends State<HeartDataInput> {
                   children: [
                     TextFormField(
                       onChanged: (value) {
-                        final String commas_replaced = value.replaceAll(',', '.');
-                        input_1_preejection_period = double.parse(commas_replaced);
-                        developer.log('input_1_preejection_period: $input_1_preejection_period', name: 'input_1_preejection_period');
+                        String commas_replaced = value.replaceAll(',', '.');
+                        input_1_preejection_period =
+                            double.parse(commas_replaced);
+                        developer.log(
+                            'input_1_preejection_period: $input_1_preejection_period',
+                            name: 'input_1_preejection_period');
                       },
                       focusNode: _field1preejectionPeriodFocusNode,
                       onFieldSubmitted: (String val) {
@@ -286,9 +287,11 @@ class _HeartDataInputState extends State<HeartDataInput> {
                     ),
                     TextFormField(
                       onChanged: (value) {
-                        final String commas_replaced = value.replaceAll(',', '.');
+                        String commas_replaced = value.replaceAll(',', '.');
                         input_2_systolic_period = double.parse(commas_replaced);
-                        developer.log('input_2_systolic_period: $input_2_systolic_period', name: 'input_2_systolic_period');
+                        developer.log(
+                            'input_2_systolic_period: $input_2_systolic_period',
+                            name: 'input_2_systolic_period');
                       },
                       focusNode: _field2TotalSystolicPeriodFocusNode,
                       onFieldSubmitted: (String val) {
@@ -308,7 +311,6 @@ class _HeartDataInputState extends State<HeartDataInput> {
                               title: const Text('How to measure:'),
                               content: InteractiveViewer(
                                 maxScale: 1.9,
-
                                 child: Padding(
                                   child: const Image(
                                     image: AssetImage(
@@ -345,9 +347,12 @@ class _HeartDataInputState extends State<HeartDataInput> {
                     ),
                     TextFormField(
                       onChanged: (value) {
-                        final String commas_replaced = value.replaceAll(',', '.');
-                        input_3a_end_systolic_volume = double.parse(commas_replaced);
-                        developer.log('input_3a_end_systolic_volume: $input_3a_end_systolic_volume', name: 'input_3a_end_systolic_volume');
+                        String commas_replaced = value.replaceAll(',', '.');
+                        input_3a_end_systolic_volume =
+                            double.parse(commas_replaced);
+                        developer.log(
+                            'input_3a_end_systolic_volume: $input_3a_end_systolic_volume',
+                            name: 'input_3a_end_systolic_volume');
                       },
                       focusNode: _field3EndSystolicVolumeFocusNode,
                       onFieldSubmitted: (String val) {
@@ -365,8 +370,8 @@ class _HeartDataInputState extends State<HeartDataInput> {
                             builder: (BuildContext context) => AlertDialog(
                               title: const Text(
                                   'Left ventricular end-systolic (LV ESV) and end-diastolic volume (LV EDV) should be assessed in apical four chamber view.'),
-                              content: InteractiveViewer(                    maxScale: 1.9,
-
+                              content: InteractiveViewer(
+                                maxScale: 1.9,
                                 child: Padding(
                                   child: const Image(
                                     image: AssetImage(
@@ -389,7 +394,6 @@ class _HeartDataInputState extends State<HeartDataInput> {
                             size: 27.0,
                           ),
                         ),
-
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -404,9 +408,12 @@ class _HeartDataInputState extends State<HeartDataInput> {
                     ),
                     TextFormField(
                       onChanged: (value) {
-                        final String commas_replaced = value.replaceAll(',', '.');
-                        input_3b_end_diastolic_volume = double.parse(commas_replaced);
-                        developer.log('input_3b_end_diastolic_volume: $input_3b_end_diastolic_volume', name: 'input_3b_end_diastolic_volume');
+                        String commas_replaced = value.replaceAll(',', '.');
+                        input_3b_end_diastolic_volume =
+                            double.parse(commas_replaced);
+                        developer.log(
+                            'input_3b_end_diastolic_volume: $input_3b_end_diastolic_volume',
+                            name: 'input_3b_end_diastolic_volume');
                       },
                       focusNode: _field4EndDiastolicVolumeFocusNode,
                       onFieldSubmitted: (String val) {
@@ -418,15 +425,14 @@ class _HeartDataInputState extends State<HeartDataInput> {
                         filled: true,
                         hintText: '(mL)',
                         labelText: 'End-diastolic volume',
-
                         suffixIcon: IconButton(
                           onPressed: () => showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
                               title: const Text(
                                   'Left ventricular end-systolic (LV ESV) and end-diastolic volume (LV EDV) should be assessed in apical four chamber view.'),
-                              content: InteractiveViewer(                    maxScale: 1.9,
-
+                              content: InteractiveViewer(
+                                maxScale: 1.9,
                                 child: const Padding(
                                   child: Image(
                                     image: AssetImage(
@@ -449,8 +455,6 @@ class _HeartDataInputState extends State<HeartDataInput> {
                             size: 27.0,
                           ),
                         ),
-
-
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -469,10 +473,13 @@ class _HeartDataInputState extends State<HeartDataInput> {
                           Expanded(
                             child: TextFormField(
                               onChanged: (value) {
-                                final String commas_replaced = value.replaceAll(',', '.');
+                                String commas_replaced =
+                                    value.replaceAll(',', '.');
                                 input_4a_systolic_bloodpressure =
                                     double.parse(commas_replaced);
-                                developer.log('input_4a_systolic_bloodpressure: $input_4a_systolic_bloodpressure', name: 'input_4a_systolic_bloodpressure');
+                                developer.log(
+                                    'input_4a_systolic_bloodpressure: $input_4a_systolic_bloodpressure',
+                                    name: 'input_4a_systolic_bloodpressure');
                               },
                               focusNode: _field5SystolicFocusNode,
                               onFieldSubmitted: (String val) {
@@ -491,8 +498,8 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                         AlertDialog(
                                       title: const Text(
                                           'Notes about measuring blood pressure.'),
-                                      content: InteractiveViewer(                    maxScale: 1.9,
-
+                                      content: InteractiveViewer(
+                                        maxScale: 1.9,
                                         child: Padding(
                                           child: const Text(
                                               "Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),
@@ -531,10 +538,13 @@ class _HeartDataInputState extends State<HeartDataInput> {
                           Expanded(
                             child: TextFormField(
                               onChanged: (value) {
-                                final String commas_replaced = value.replaceAll(',', '.');
+                                String commas_replaced =
+                                    value.replaceAll(',', '.');
                                 input_4b_diastolic_bloodpressure =
                                     double.parse(commas_replaced);
-                                developer.log('input_4b_diastolic_bloodpressure: $input_4b_diastolic_bloodpressure', name: 'input_4b_diastolic_bloodpressure');
+                                developer.log(
+                                    'input_4b_diastolic_bloodpressure: $input_4b_diastolic_bloodpressure',
+                                    name: 'input_4b_diastolic_bloodpressure');
                               },
                               focusNode: _field6DiastolicFocusNode,
                               onFieldSubmitted: (String val) {
@@ -553,8 +563,8 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                         AlertDialog(
                                       title: const Text(
                                           'Notes about measuring blood pressure.'),
-                                      content: InteractiveViewer(                    maxScale: 1.9,
-
+                                      content: InteractiveViewer(
+                                        maxScale: 1.9,
                                         child: Padding(
                                           child: const Text(
                                               "Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),
@@ -594,9 +604,10 @@ class _HeartDataInputState extends State<HeartDataInput> {
                     ),
                     TextFormField(
                       onChanged: (value) {
-                        final String commas_replaced = value.replaceAll(',', '.');
+                        String commas_replaced = value.replaceAll(',', '.');
                         input_5_heartrate = double.parse(commas_replaced);
-                        developer.log('input_5_heartrate: $input_5_heartrate', name: 'input_5_heartrate');
+                        developer.log('input_5_heartrate: $input_5_heartrate',
+                            name: 'input_5_heartrate');
                       },
                       focusNode: _field7HearRateFocusNode,
                       // onFieldSubmitted: (String val) {
@@ -631,24 +642,21 @@ class _HeartDataInputState extends State<HeartDataInput> {
                     const SizedBox(
                       height: 25,
                     ),
+                    Container(
+                      alignment: Alignment.bottomLeft,
+                      child: MarkdownBody(
+                        data:
+                            "[Privacy\u{00A0}policy](https://github.com/DominikBitzer/heart_work_culator/blob/master/assets/privacy_policy.md)",
+                        onTapLink: (text, url, title) {
+                          Navigator.pushNamed(
+                            context,
+                            '/privacy_policy',
+                          );
 
-                    Container
-
-                    (              alignment: Alignment.bottomLeft,child:MarkdownBody(
-                      data: "[Privacy\u{00A0}policy](https://github.com/DominikBitzer/heart_work_culator/blob/master/assets/privacy_policy.md)",
-                      onTapLink: (text, url, title) {
-
-                        Navigator.pushNamed(
-                          context,
-                          '/privacy_policy',
-                        );
-
-
-
-                        // launch(url!);
-                      },
-                    ),
-)
+                          // launch(url!);
+                        },
+                      ),
+                    )
                   ],
                 ),
               ),

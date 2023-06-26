@@ -3,6 +3,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:heart_work_culator/src/TUM_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:developer' as developer;
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,13 +20,12 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
   bool? agreedToTerms = false;
 
   String privacy_policy = "error on loading text";
-  String terms_of_service  = "error on loading text";
+  String terms_of_service = "error on loading text";
 
   void loadAsset() async {
-    final _privacyPolicy = await rootBundle.loadString('assets/privacy_policy.md');
-    final _terms_of_service = await rootBundle.loadString('assets/terms_of_service.md');
+    final _terms_of_service =
+        await rootBundle.loadString('assets/terms_of_service.md');
     setState(() {
-      privacy_policy = _privacyPolicy;
       terms_of_service = _terms_of_service;
     });
   }
@@ -50,6 +50,7 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
               Expanded(
                 child: Scrollbar(
                   child: SingleChildScrollView(
+                    primary: true,
                     padding: EdgeInsets.all(16),
                     child: MarkdownBody(
                       data: terms_of_service,
@@ -96,13 +97,10 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
                               data: "I agree to the terms of service "
                                   "\n\nand to the [privacy\u{00A0}policy](https://github.com/DominikBitzer/heart_work_culator/blob/master/assets/privacy_policy.md).",
                               onTapLink: (text, url, title) {
-
-                                  Navigator.pushNamed(
-                                    context,
-                                    '/privacy_policy',
-                                  );
-
-
+                                Navigator.pushNamed(
+                                  context,
+                                  '/privacy_policy',
+                                );
 
                                 // launch(url!);
                               },
@@ -140,8 +138,9 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
                   void _incrementCounter() async {
                     final prefs = await SharedPreferences.getInstance();
                     setState(() {
-                      print(agreedToTerms.runtimeType);
-                      print(agreedToTerms);
+                      Type agreedToTermsType = agreedToTerms.runtimeType;
+                      developer.log('agreedToTerms.runtimeType: $agreedToTermsType');
+                      developer.log('agreedToTerms.runtimeType: $agreedToTerms');
 
                       prefs.setBool(
                           'terms_have_been_accepted', agreedToTerms ?? false);
@@ -150,19 +149,10 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
 
                   _incrementCounter();
 
-                  if (Navigator.canPop(context))
-                  {
-                    Navigator.pop(context);
-                  }
-                  else {
-                    Navigator.pushNamed(
-                      context,
-                      '/input_data',
-                    );
-
-                  }
-
-
+                  Navigator.pushNamed(
+                    context,
+                    '/input_data',
+                  );
                 },
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
