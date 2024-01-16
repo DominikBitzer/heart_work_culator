@@ -18,16 +18,19 @@ class HeartWorkCulatorApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Heart-Work-Culator',
-      theme: ThemeData(primarySwatch: Palette.tum_color_swatch),
+      theme: ThemeData(
+        primarySwatch: Palette.tum_color_swatch,
+        useMaterial3: false,
+      ),
       initialRoute: '/input_data',
       routes: {
         '/input_data': (context) => const HeartDataInput(),
         '/welcome_disclaimer': (context) => const ShowAndAcceptTerms(),
-        '/privacy_policy': (context) => const ShowMdFile(md_file_name:'assets/privacy_policy.md'),
+        '/privacy_policy': (context) =>
+            const ShowMdFile(md_file_name: 'assets/privacy_policy.md'),
         '/display_analysis': (context) => const DisplayOfAnalysis(),
         '/impressum': (context) => const Impressum(),
       },
     );
   }
 }
-
