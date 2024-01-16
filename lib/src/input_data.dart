@@ -7,7 +7,7 @@ import 'dart:developer' as developer;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HeartDataInput extends StatefulWidget {
-  const HeartDataInput({Key? key}) : super(key: key);
+  const HeartDataInput({super.key});
 
   @override
   _HeartDataInputState createState() => _HeartDataInputState();
@@ -16,13 +16,13 @@ class HeartDataInput extends StatefulWidget {
 class _HeartDataInputState extends State<HeartDataInput> {
   final _formKey = GlobalKey<FormState>();
 
-  FocusNode _field1preejectionPeriodFocusNode = FocusNode();
-  FocusNode _field2TotalSystolicPeriodFocusNode = FocusNode();
-  FocusNode _field3EndSystolicVolumeFocusNode = FocusNode();
-  FocusNode _field4EndDiastolicVolumeFocusNode = FocusNode();
-  FocusNode _field5SystolicFocusNode = FocusNode();
-  FocusNode _field6DiastolicFocusNode = FocusNode();
-  FocusNode _field7HearRateFocusNode = FocusNode();
+  final FocusNode _field1preejectionPeriodFocusNode = FocusNode();
+  final FocusNode _field2TotalSystolicPeriodFocusNode = FocusNode();
+  final FocusNode _field3EndSystolicVolumeFocusNode = FocusNode();
+  final FocusNode _field4EndDiastolicVolumeFocusNode = FocusNode();
+  final FocusNode _field5SystolicFocusNode = FocusNode();
+  final FocusNode _field6DiastolicFocusNode = FocusNode();
+  final FocusNode _field7HearRateFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -33,9 +33,9 @@ class _HeartDataInputState extends State<HeartDataInput> {
   void _checkIfTermsAccepted() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      bool terms_have_been_accepted =
+      bool termsHaveBeenAccepted =
           (prefs.getBool('terms_have_been_accepted') ?? false);
-      if (!terms_have_been_accepted) {
+      if (!termsHaveBeenAccepted) {
         Navigator.pushNamed(
           context,
           '/welcome_disclaimer',
@@ -60,7 +60,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
 
     Map<String, double> calculatedResults = {};
 
-    List<double> array_ai_fixed_values = [
+    List<double> arrayAiFixedValues = [
       0.35695,
       -7.2266,
       74.249,
@@ -70,74 +70,74 @@ class _HeartDataInputState extends State<HeartDataInput> {
       571.95,
       -159.1
     ];
-    double temp_e_nd_sum = 0.0;
-    double quotient_preejection_durch_totalsystolic =
+    double tempENdSum = 0.0;
+    double quotientPreejectionDurchTotalsystolic =
         input_1_preejection_period / input_2_systolic_period;
     for (int i = 0; i <= 7; i++) {
-      temp_e_nd_sum += array_ai_fixed_values[i] *
-          pow(quotient_preejection_durch_totalsystolic, i);
+      tempENdSum += arrayAiFixedValues[i] *
+          pow(quotientPreejectionDurchTotalsystolic, i);
     }
-    calculatedResults["E_Nd(avg)"] = temp_e_nd_sum;
+    calculatedResults["E_Nd(avg)"] = tempENdSum;
 
-    double SV_stroke_volume =
+    double svStrokeVolume =
         (input_3b_end_diastolic_volume - input_3a_end_systolic_volume);
 
-    calculatedResults["stroke_volume"] = SV_stroke_volume;
+    calculatedResults["stroke_volume"] = svStrokeVolume;
 
-    double ejection_fraction = SV_stroke_volume / input_3b_end_diastolic_volume;
-    calculatedResults["ejection_fraction"] = ejection_fraction;
+    double ejectionFraction = svStrokeVolume / input_3b_end_diastolic_volume;
+    calculatedResults["ejection_fraction"] = ejectionFraction;
 
-    double P_es_endsystolic_bloodpressure =
+    double pEsEndsystolicBloodpressure =
         0.9 * input_4a_systolic_bloodpressure;
     calculatedResults["P_es_endsystolic_bloodpressure"] =
-        P_es_endsystolic_bloodpressure;
+        pEsEndsystolicBloodpressure;
 
-    double E_Nd_est = 0.0275 -
-        (0.165 * ejection_fraction) +
+    double eNdEst = 0.0275 -
+        (0.165 * ejectionFraction) +
         0.3656 *
             (input_4b_diastolic_bloodpressure /
-                P_es_endsystolic_bloodpressure) +
-        0.515 * temp_e_nd_sum;
-    calculatedResults["E_Nd(est)"] = E_Nd_est;
+                pEsEndsystolicBloodpressure) +
+        0.515 * tempENdSum;
+    calculatedResults["E_Nd(est)"] = eNdEst;
 
-    double E_es_sb = (input_4b_diastolic_bloodpressure -
-            (E_Nd_est * input_4a_systolic_bloodpressure * 0.9)) /
-        (SV_stroke_volume * E_Nd_est);
-    calculatedResults["E_es_sb"] = E_es_sb;
+    double eEsSb = (input_4b_diastolic_bloodpressure -
+            (eNdEst * input_4a_systolic_bloodpressure * 0.9)) /
+        (svStrokeVolume * eNdEst);
+    calculatedResults["E_es_sb"] = eEsSb;
 
-    double Ea_arterial_elastance =
-        P_es_endsystolic_bloodpressure / SV_stroke_volume;
-    calculatedResults["Ea_arterial_elastance"] = Ea_arterial_elastance;
+    double eaArterialElastance =
+        pEsEndsystolicBloodpressure / svStrokeVolume;
+    calculatedResults["Ea_arterial_elastance"] = eaArterialElastance;
 
-    double SW_stroke_work = P_es_endsystolic_bloodpressure * SV_stroke_volume;
-    calculatedResults["SW_stroke_work"] = SW_stroke_work;
+    double swStrokeWork = pEsEndsystolicBloodpressure * svStrokeVolume;
+    calculatedResults["SW_stroke_work"] = swStrokeWork;
 
-    double V_0 = input_3a_end_systolic_volume -
-        (P_es_endsystolic_bloodpressure / E_es_sb);
-    calculatedResults["V_0"] = V_0;
+    double v0 = input_3a_end_systolic_volume -
+        (pEsEndsystolicBloodpressure / eEsSb);
+    calculatedResults["V_0"] = v0;
 
     double Epot = 0.5 *
-        (input_3a_end_systolic_volume - V_0) *
-        P_es_endsystolic_bloodpressure;
+        (input_3a_end_systolic_volume - v0) *
+        pEsEndsystolicBloodpressure;
     calculatedResults["Epot"] = Epot;
 
-    double PVA_Pressure_volume_area = Epot + SW_stroke_work;
-    calculatedResults["PVA_Pressure_volume_area"] = PVA_Pressure_volume_area;
+    double pvaPressureVolumeArea = Epot + swStrokeWork;
+    calculatedResults["PVA_Pressure_volume_area"] = pvaPressureVolumeArea;
 
-    double CW_cardiac_work = SW_stroke_work * input_5_heartrate;
-    calculatedResults["CW_cardiac_work"] = CW_cardiac_work;
+    double cwCardiacWork = swStrokeWork * input_5_heartrate;
+    calculatedResults["CW_cardiac_work"] = cwCardiacWork;
 
-    double Work_efficiency = SW_stroke_work / PVA_Pressure_volume_area;
-    calculatedResults["Work_efficiency"] = Work_efficiency;
+    double workEfficiency = swStrokeWork / pvaPressureVolumeArea;
+    calculatedResults["Work_efficiency"] = workEfficiency;
 
-    double reciprocal_cardiac_efficiency =
-        PVA_Pressure_volume_area / SV_stroke_volume;
+    double reciprocalCardiacEfficiency =
+        pvaPressureVolumeArea / svStrokeVolume;
     calculatedResults["reciprocal_cardiac_efficiency"] =
-        reciprocal_cardiac_efficiency;
+        reciprocalCardiacEfficiency;
 
-    double VAC_ventricular_arterial_coupling = Ea_arterial_elastance / E_es_sb;
+    double vacVentricularArterialCoupling = eaArterialElastance / eEsSb;
     calculatedResults["VAC_ventricular_arterial_coupling"] =
-        VAC_ventricular_arterial_coupling;
+        vacVentricularArterialCoupling;
 
     Navigator.pushNamed(
       context,
@@ -207,13 +207,13 @@ class _HeartDataInputState extends State<HeartDataInput> {
                 color: Colors.grey.withOpacity(0.3),
                 spreadRadius: 5,
                 blurRadius: 5,
-                offset: Offset(0, 7), // changes position of shadow
+                offset: const Offset(0, 7), // changes position of shadow
               ),
             ],
             color: Theme.of(context).scaffoldBackgroundColor,
           ),
           alignment: Alignment.topCenter,
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
             maxWidth: 700,
           ),
           child: Form(
@@ -225,9 +225,9 @@ class _HeartDataInputState extends State<HeartDataInput> {
                   children: [
                     TextFormField(
                       onChanged: (value) {
-                        String commas_replaced = value.replaceAll(',', '.');
+                        String commasReplaced = value.replaceAll(',', '.');
                         input_1_preejection_period =
-                            double.parse(commas_replaced);
+                            double.parse(commasReplaced);
                         developer.log(
                             'input_1_preejection_period: $input_1_preejection_period',
                             name: 'input_1_preejection_period');
@@ -251,12 +251,12 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                   'Aortic Doppler waveform and the determination of pre-ejection and and total-systolic period'),
                               content: InteractiveViewer(
                                 maxScale: 1.9,
-                                child: Padding(
-                                  child: const Image(
+                                child: const Padding(
+                                  padding: EdgeInsets.all(1.0),
+                                  child: Image(
                                     image: AssetImage(
                                         'assets/five_chamber_view_app.png'),
                                   ),
-                                  padding: const EdgeInsets.all(1.0),
                                 ),
                               ),
                               actions: <Widget>[
@@ -267,7 +267,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                               ],
                             ),
                           ),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.info,
                             color: Colors.blue,
                             size: 27.0,
@@ -278,6 +278,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                         if (value!.isEmpty) {
                           return 'Please enter a value.';
                         }
+                        return null;
                       },
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
@@ -287,8 +288,8 @@ class _HeartDataInputState extends State<HeartDataInput> {
                     ),
                     TextFormField(
                       onChanged: (value) {
-                        String commas_replaced = value.replaceAll(',', '.');
-                        input_2_systolic_period = double.parse(commas_replaced);
+                        String commasReplaced = value.replaceAll(',', '.');
+                        input_2_systolic_period = double.parse(commasReplaced);
                         developer.log(
                             'input_2_systolic_period: $input_2_systolic_period',
                             name: 'input_2_systolic_period');
@@ -311,12 +312,12 @@ class _HeartDataInputState extends State<HeartDataInput> {
                               title: const Text('How to measure:'),
                               content: InteractiveViewer(
                                 maxScale: 1.9,
-                                child: Padding(
-                                  child: const Image(
+                                child: const Padding(
+                                  padding: EdgeInsets.all(1.0),
+                                  child: Image(
                                     image: AssetImage(
                                         'assets/five_chamber_view_app.png'),
                                   ),
-                                  padding: const EdgeInsets.all(1.0),
                                 ),
                               ),
                               actions: <Widget>[
@@ -327,7 +328,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                               ],
                             ),
                           ),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.info,
                             color: Colors.blue,
                             size: 27.0,
@@ -338,6 +339,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                         if (value!.isEmpty) {
                           return 'Please enter a value.';
                         }
+                        return null;
                       },
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
@@ -347,9 +349,9 @@ class _HeartDataInputState extends State<HeartDataInput> {
                     ),
                     TextFormField(
                       onChanged: (value) {
-                        String commas_replaced = value.replaceAll(',', '.');
+                        String commasReplaced = value.replaceAll(',', '.');
                         input_3a_end_systolic_volume =
-                            double.parse(commas_replaced);
+                            double.parse(commasReplaced);
                         developer.log(
                             'input_3a_end_systolic_volume: $input_3a_end_systolic_volume',
                             name: 'input_3a_end_systolic_volume');
@@ -372,12 +374,12 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                   'Left ventricular end-systolic (LV ESV) and end-diastolic volume (LV EDV) should be assessed in apical four chamber view.'),
                               content: InteractiveViewer(
                                 maxScale: 1.9,
-                                child: Padding(
-                                  child: const Image(
+                                child: const Padding(
+                                  padding: EdgeInsets.all(1.0),
+                                  child: Image(
                                     image: AssetImage(
                                         'assets/LV_EDV_ESV_infobox.png'),
                                   ),
-                                  padding: const EdgeInsets.all(1.0),
                                 ),
                               ),
                               actions: <Widget>[
@@ -388,7 +390,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                               ],
                             ),
                           ),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.info,
                             color: Colors.blue,
                             size: 27.0,
@@ -399,6 +401,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                         if (value!.isEmpty) {
                           return 'Please enter a value.';
                         }
+                        return null;
                       },
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
@@ -408,9 +411,9 @@ class _HeartDataInputState extends State<HeartDataInput> {
                     ),
                     TextFormField(
                       onChanged: (value) {
-                        String commas_replaced = value.replaceAll(',', '.');
+                        String commasReplaced = value.replaceAll(',', '.');
                         input_3b_end_diastolic_volume =
-                            double.parse(commas_replaced);
+                            double.parse(commasReplaced);
                         developer.log(
                             'input_3b_end_diastolic_volume: $input_3b_end_diastolic_volume',
                             name: 'input_3b_end_diastolic_volume');
@@ -434,11 +437,11 @@ class _HeartDataInputState extends State<HeartDataInput> {
                               content: InteractiveViewer(
                                 maxScale: 1.9,
                                 child: const Padding(
+                                  padding: EdgeInsets.all(1.0),
                                   child: Image(
                                     image: AssetImage(
                                         'assets/LV_EDV_ESV_infobox.png'),
                                   ),
-                                  padding: EdgeInsets.all(1.0),
                                 ),
                               ),
                               actions: <Widget>[
@@ -449,7 +452,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                               ],
                             ),
                           ),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.info,
                             color: Colors.blue,
                             size: 27.0,
@@ -460,6 +463,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                         if (value!.isEmpty) {
                           return 'Please enter a value.';
                         }
+                        return null;
                       },
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
@@ -473,10 +477,10 @@ class _HeartDataInputState extends State<HeartDataInput> {
                           Expanded(
                             child: TextFormField(
                               onChanged: (value) {
-                                String commas_replaced =
+                                String commasReplaced =
                                     value.replaceAll(',', '.');
                                 input_4a_systolic_bloodpressure =
-                                    double.parse(commas_replaced);
+                                    double.parse(commasReplaced);
                                 developer.log(
                                     'input_4a_systolic_bloodpressure: $input_4a_systolic_bloodpressure',
                                     name: 'input_4a_systolic_bloodpressure');
@@ -500,10 +504,10 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                           'Notes about measuring blood pressure.'),
                                       content: InteractiveViewer(
                                         maxScale: 1.9,
-                                        child: Padding(
-                                          child: const Text(
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(1.0),
+                                          child: Text(
                                               "Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),
-                                          padding: const EdgeInsets.all(1.0),
                                         ),
                                       ),
                                       actions: <Widget>[
@@ -515,7 +519,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                       ],
                                     ),
                                   ),
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.info,
                                     color: Colors.blue,
                                     size: 27.0,
@@ -526,22 +530,23 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                 if (value!.isEmpty) {
                                   return 'Please enter a value.';
                                 }
+                                return null;
                               },
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.next,
                             ),
                           ),
-                          Text(
+                          const Text(
                             ' / ',
-                            style: const TextStyle(fontSize: 30),
+                            style: TextStyle(fontSize: 30),
                           ),
                           Expanded(
                             child: TextFormField(
                               onChanged: (value) {
-                                String commas_replaced =
+                                String commasReplaced =
                                     value.replaceAll(',', '.');
                                 input_4b_diastolic_bloodpressure =
-                                    double.parse(commas_replaced);
+                                    double.parse(commasReplaced);
                                 developer.log(
                                     'input_4b_diastolic_bloodpressure: $input_4b_diastolic_bloodpressure',
                                     name: 'input_4b_diastolic_bloodpressure');
@@ -565,10 +570,10 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                           'Notes about measuring blood pressure.'),
                                       content: InteractiveViewer(
                                         maxScale: 1.9,
-                                        child: Padding(
-                                          child: const Text(
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(1.0),
+                                          child: Text(
                                               "Blood pressure should be measured in laying position simultaneously to echocardiographic examination."),
-                                          padding: const EdgeInsets.all(1.0),
                                         ),
                                       ),
                                       actions: <Widget>[
@@ -580,7 +585,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                       ],
                                     ),
                                   ),
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.info,
                                     color: Colors.blue,
                                     size: 27.0,
@@ -591,6 +596,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                                 if (value!.isEmpty) {
                                   return 'Please enter a value.';
                                 }
+                                return null;
                               },
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.next,
@@ -604,8 +610,8 @@ class _HeartDataInputState extends State<HeartDataInput> {
                     ),
                     TextFormField(
                       onChanged: (value) {
-                        String commas_replaced = value.replaceAll(',', '.');
-                        input_5_heartrate = double.parse(commas_replaced);
+                        String commasReplaced = value.replaceAll(',', '.');
+                        input_5_heartrate = double.parse(commasReplaced);
                         developer.log('input_5_heartrate: $input_5_heartrate',
                             name: 'input_5_heartrate');
                       },
@@ -623,6 +629,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
                         if (value!.isEmpty) {
                           return 'Please enter a value.';
                         }
+                        return null;
                       },
                       keyboardType: TextInputType.number,
                     ),

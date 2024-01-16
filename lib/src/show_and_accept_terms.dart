@@ -8,7 +8,7 @@ import 'dart:developer' as developer;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShowAndAcceptTerms extends StatefulWidget {
-  const ShowAndAcceptTerms({Key? key}) : super(key: key);
+  const ShowAndAcceptTerms({super.key});
 
   @override
   _ShowAndAcceptTermsState createState() => _ShowAndAcceptTermsState();
@@ -23,10 +23,10 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
   String terms_of_service = "error on loading text";
 
   void loadAsset() async {
-    final _terms_of_service =
+    final termsOfServiceRootBundle =
         await rootBundle.loadString('assets/terms_of_service.md');
     setState(() {
-      terms_of_service = _terms_of_service;
+      terms_of_service = termsOfServiceRootBundle;
     });
   }
 
@@ -51,11 +51,11 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
                 child: Scrollbar(
                   child: SingleChildScrollView(
                     primary: true,
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: MarkdownBody(
                       data: terms_of_service,
                       onTapLink: (text, url, title) {
-                        launch(url!);
+                        launchUrl(Uri.parse(url!));
                       },
                     ),
                   ),
@@ -117,8 +117,8 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
                             formFieldState.errorText ?? "",
                             style: Theme.of(context)
                                 .textTheme
-                                .caption!
-                                .copyWith(color: Theme.of(context).errorColor),
+                                .bodySmall!
+                                .copyWith(color: Theme.of(context).colorScheme.error),
                           ),
                       ],
                     );
@@ -135,7 +135,7 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
                     return;
                   }
 
-                  void _incrementCounter() async {
+                  void incrementCounter() async {
                     final prefs = await SharedPreferences.getInstance();
                     setState(() {
                       Type agreedToTermsType = agreedToTerms.runtimeType;
@@ -147,7 +147,7 @@ class _ShowAndAcceptTermsState extends State<ShowAndAcceptTerms> {
                     });
                   }
 
-                  _incrementCounter();
+                  incrementCounter();
 
                   Navigator.pushNamed(
                     context,
