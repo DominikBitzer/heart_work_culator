@@ -49,7 +49,7 @@ android {
     defaultConfig {
         applicationId "com.dominikb.heart_work_culator"
         minSdkVersion flutter.minSdkVersion
-        targetSdkVersion 34
+        targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
