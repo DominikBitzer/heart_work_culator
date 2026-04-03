@@ -20,25 +20,21 @@ class DisplayOfAnalysis extends StatelessWidget {
       ),
       body: Center(
         child: Container(
-
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
+                color: Colors.grey.withValues(alpha: 0.3),
                 spreadRadius: 5,
                 blurRadius: 5,
                 offset: const Offset(0, 7), // changes position of shadow
               ),
             ],
             color: Theme.of(context).scaffoldBackgroundColor,
-
           ),
-
           alignment: Alignment.topCenter,
           constraints: const BoxConstraints(
             maxWidth: 700,
           ),
-
           child: Scrollbar(
             child: SingleChildScrollView(
               child: Column(
@@ -47,7 +43,8 @@ class DisplayOfAnalysis extends StatelessWidget {
                     height: 15,
                   ),
                   const Text(
-                    "Your calculated results are:",
+                    "Your calculated results:\n(click on value to get reference values)",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -59,8 +56,8 @@ class DisplayOfAnalysis extends StatelessWidget {
                     child: Table(
                       columnWidths: const <int, TableColumnWidth>{
                         0: FlexColumnWidth(),
-                        1: FixedColumnWidth(70),
-                        2: FixedColumnWidth(40),
+                        1: FixedColumnWidth(90),
+                        2: FixedColumnWidth(30),
                       },
                       children: [
                         TableRow(children: [
@@ -70,7 +67,7 @@ class DisplayOfAnalysis extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.all(6.0),
                               child: Text(
-                                  "Left ventricular end-systolic elastance (E_es_sb,\u{00A0}mmHg/mL):"),
+                                  "Left ventricular end-systolic elastance (Ees(sb),\u{00A0}mmHg/mL):"),
                             ),
                           ),
                           TableCell(
@@ -78,10 +75,60 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                  calculatedResults['E_es_sb']!
-                                      .toStringAsFixed(2),
-                                  textAlign: TextAlign.end),
+                              child: TextButton(
+                                onPressed: () => showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    title: const Text(
+                                        "Reference values for \n\"Left ventricular end-systolic elastance\"\n(Ees(sb),\u{00A0}mmHg/mL):"),
+                                    content: Table(
+                                        columnWidths: const <int,
+                                            TableColumnWidth>{
+                                          0: FixedColumnWidth(100),
+                                          1: FlexColumnWidth(),
+                                        },
+                                        defaultVerticalAlignment:
+                                            TableCellVerticalAlignment.middle,
+                                        children: <TableRow>[
+                                          TableRow(children: <Widget>[
+                                            Text('Age group:', textAlign: TextAlign.center),
+                                            Text(
+                                                'Statistical\nreference values:',
+                                                textAlign: TextAlign.center)
+                                          ]),
+                                          TableRow(children: <Widget>[
+                                            Text('5 - 9',textAlign: TextAlign.center),
+                                            Text('xyz',
+                                                textAlign: TextAlign.center)
+                                          ]),
+                                          TableRow(children: <Widget>[
+                                            Text('10 - 14',textAlign: TextAlign.center),
+                                            Text('xyz',
+                                                textAlign: TextAlign.center)
+                                          ]),
+                                          TableRow(children: <Widget>[
+                                            Text('15 - 19',textAlign: TextAlign.center),
+                                            Text('xyz',
+                                                textAlign: TextAlign.center)
+                                          ]),
+                                        ]),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'OK'),
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                style: ButtonStyle(
+                                    alignment: Alignment.centerRight),
+                                child: Text(
+                                    calculatedResults['E_es_sb']!
+                                        .toStringAsFixed(2),
+                                    textAlign: TextAlign.end),
+                              ),
                             ),
                           ),
                           const Padding(
@@ -94,8 +141,8 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: EdgeInsets.all(6.0),
-                              child:
-                                  Text("Arterial elastance (Ea,\u{00A0}mmHg\u{2060}/\u{2060}mL):"),
+                              child: Text(
+                                  "Arterial elastance\n(Ea,\u{00A0}mmHg\u{2060}/\u{2060}mL):"),
                             ),
                           ),
                           TableCell(
@@ -103,10 +150,60 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                  calculatedResults['Ea_arterial_elastance']!
-                                      .toStringAsFixed(2),
-                                  textAlign: TextAlign.end),
+                              child: TextButton(
+                                onPressed: () => showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        title: const Text(
+                                            "Reference values for \n\"Arterial elastance\"\n(Ea,\u{00A0}mmHg\u{2060}/\u{2060}mL):"),
+                                        content: Table(
+                                            columnWidths: const <int,
+                                                TableColumnWidth>{
+                                              0: FixedColumnWidth(100),
+                                              1: FlexColumnWidth(),
+                                            },
+                                            defaultVerticalAlignment:
+                                            TableCellVerticalAlignment.middle,
+                                            children: <TableRow>[
+                                              TableRow(children: <Widget>[
+                                                Text('Age group:', textAlign: TextAlign.center),
+                                                Text(
+                                                    'Statistical\nreference values:',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('5 - 9',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('10 - 14',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('15 - 19',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                            ]),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                ),
+                                style: ButtonStyle(
+                                    alignment: Alignment.centerRight),
+                                child: Text(
+                                    calculatedResults['Ea_arterial_elastance']!
+                                        .toStringAsFixed(2),
+                                    textAlign: TextAlign.end),
+                              ),
                             ),
                           ),
                           const Padding(
@@ -120,7 +217,7 @@ class DisplayOfAnalysis extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.all(6.0),
                               child: Text(
-                                  "Ventricular arterial coupling (Ea\u{2060}/\u{2060}E_es_sb):"),
+                                  "Ventricular arterial coupling\n(Ea\u{2060}/\u{2060}Ees(sb)):"),
                             ),
                           ),
                           TableCell(
@@ -128,11 +225,61 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                  calculatedResults[
-                                          'VAC_ventricular_arterial_coupling']!
-                                      .toStringAsFixed(2),
-                                  textAlign: TextAlign.end),
+                              child: TextButton(
+                                onPressed: () => showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        title: const Text(
+                                            "Reference values for \n\"Ventricular arterial coupling\"\n(Ea\u{2060}/\u{2060}Ees(sb)):"),
+                                        content: Table(
+                                            columnWidths: const <int,
+                                                TableColumnWidth>{
+                                              0: FixedColumnWidth(100),
+                                              1: FlexColumnWidth(),
+                                            },
+                                            defaultVerticalAlignment:
+                                            TableCellVerticalAlignment.middle,
+                                            children: <TableRow>[
+                                              TableRow(children: <Widget>[
+                                                Text('Age group:', textAlign: TextAlign.center),
+                                                Text(
+                                                    'Statistical\nreference values:',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('5 - 9',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('10 - 14',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('15 - 19',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                            ]),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                ),
+                                style: ButtonStyle(
+                                    alignment: Alignment.centerRight),
+                                child: Text(
+                                    calculatedResults[
+                                            'VAC_ventricular_arterial_coupling']!
+                                        .toStringAsFixed(2),
+                                    textAlign: TextAlign.end),
+                              ),
                             ),
                           ),
                           const Padding(
@@ -145,8 +292,8 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: EdgeInsets.all(6.0),
-                              child:
-                                  Text("Potential energy (Epot,\u{00A0}mmHg*mL):"),
+                              child: Text(
+                                  "Potential energy\n(Epot,\u{00A0}mmHg*mL):"),
                             ),
                           ),
                           TableCell(
@@ -154,13 +301,64 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                  calculatedResults['Epot']!.toStringAsFixed(0),
-                                  textAlign: TextAlign.end),
+                              child: TextButton(
+                                onPressed: () => showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        title: const Text(
+                                            "Reference values for \n\"Potential energy\"\n(Epot,\u{00A0}mmHg*mL):"),
+                                        content: Table(
+                                            columnWidths: const <int,
+                                                TableColumnWidth>{
+                                              0: FixedColumnWidth(100),
+                                              1: FlexColumnWidth(),
+                                            },
+                                            defaultVerticalAlignment:
+                                            TableCellVerticalAlignment.middle,
+                                            children: <TableRow>[
+                                              TableRow(children: <Widget>[
+                                                Text('Age group:', textAlign: TextAlign.center),
+                                                Text(
+                                                    'Statistical\nreference values:',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('5 - 9',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('10 - 14',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('15 - 19',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                            ]),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                ),
+                                style: ButtonStyle(
+                                    alignment: Alignment.centerRight),
+                                child: Text(
+                                    calculatedResults['Epot']!
+                                        .toStringAsFixed(0),
+                                    textAlign: TextAlign.end),
+                              ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(0.0),
+                            padding: const EdgeInsets.only(top: 6.0),
                             child: IconButton(
                               onPressed: () => showDialog<String>(
                                 context: context,
@@ -191,7 +389,7 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: EdgeInsets.all(6.0),
-                              child: Text("Stroke work (SW,\u{00A0}mmHg*mL):"),
+                              child: Text("Stroke work\n(SW,\u{00A0}mmHg*mL):"),
                             ),
                           ),
                           TableCell(
@@ -199,14 +397,64 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                  calculatedResults['SW_stroke_work']!
-                                      .toStringAsFixed(0),
-                                  textAlign: TextAlign.end),
+                              child: TextButton(
+                                onPressed: () => showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        title: const Text(
+                                            "Reference values for \n\"Stroke work\"\n(SW,\u{00A0}mmHg*mL):"),
+                                        content: Table(
+                                            columnWidths: const <int,
+                                                TableColumnWidth>{
+                                              0: FixedColumnWidth(100),
+                                              1: FlexColumnWidth(),
+                                            },
+                                            defaultVerticalAlignment:
+                                            TableCellVerticalAlignment.middle,
+                                            children: <TableRow>[
+                                              TableRow(children: <Widget>[
+                                                Text('Age group:', textAlign: TextAlign.center),
+                                                Text(
+                                                    'Statistical\nreference values:',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('5 - 9',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('10 - 14',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('15 - 19',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                            ]),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                ),
+                                style: ButtonStyle(
+                                    alignment: Alignment.centerRight),
+                                child: Text(
+                                    calculatedResults['SW_stroke_work']!
+                                        .toStringAsFixed(0),
+                                    textAlign: TextAlign.end),
+                              ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(0.0),
+                            padding: const EdgeInsets.only(top: 6.0),
                             child: IconButton(
                               onPressed: () => showDialog<String>(
                                 context: context,
@@ -238,7 +486,7 @@ class DisplayOfAnalysis extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.all(6.0),
                               child: Text(
-                                  "Pressure–volume area (PVA,\u{00A0}mmHg*mL):"),
+                                  "Pressure–volume area\n(PVA,\u{00A0}mmHg*mL):"),
                             ),
                           ),
                           TableCell(
@@ -246,14 +494,65 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                  calculatedResults['PVA_Pressure_volume_area']!
-                                      .toStringAsFixed(0),
-                                  textAlign: TextAlign.end),
+                              child: TextButton(
+                                onPressed: () => showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        title: const Text(
+                                            "Reference values for \n\"Pressure–volume area\"\n (PVA,\u{00A0}mmHg*mL):"),
+                                        content: Table(
+                                            columnWidths: const <int,
+                                                TableColumnWidth>{
+                                              0: FixedColumnWidth(100),
+                                              1: FlexColumnWidth(),
+                                            },
+                                            defaultVerticalAlignment:
+                                            TableCellVerticalAlignment.middle,
+                                            children: <TableRow>[
+                                              TableRow(children: <Widget>[
+                                                Text('Age group:', textAlign: TextAlign.center),
+                                                Text(
+                                                    'Statistical\nreference values:',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('5 - 9',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('10 - 14',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('15 - 19',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                            ]),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                ),
+                                style: ButtonStyle(
+                                    alignment: Alignment.centerRight),
+                                child: Text(
+                                    calculatedResults[
+                                            'PVA_Pressure_volume_area']!
+                                        .toStringAsFixed(0),
+                                    textAlign: TextAlign.end),
+                              ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(0.0),
+                            padding: const EdgeInsets.only(top: 6.0),
                             child: IconButton(
                               onPressed: () => showDialog<String>(
                                 context: context,
@@ -285,7 +584,7 @@ class DisplayOfAnalysis extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.all(6.0),
                               child: Text(
-                                  "Cardiac work (CW,\u{00A0}mmHg*mL*Heart Rate):"),
+                                  "Cardiac work\n(CW,\u{00A0}mmHg*mL*Heart Rate):"),
                             ),
                           ),
                           TableCell(
@@ -293,14 +592,64 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                  calculatedResults['CW_cardiac_work']!
-                                      .toStringAsFixed(0),
-                                  textAlign: TextAlign.end),
+                              child: TextButton(
+                                onPressed: () => showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        title: const Text(
+                                            "Reference values for \n\"Cardiac work\"\n(CW,\u{00A0}mmHg*mL*Heart Rate):"),
+                                        content: Table(
+                                            columnWidths: const <int,
+                                                TableColumnWidth>{
+                                              0: FixedColumnWidth(100),
+                                              1: FlexColumnWidth(),
+                                            },
+                                            defaultVerticalAlignment:
+                                            TableCellVerticalAlignment.middle,
+                                            children: <TableRow>[
+                                              TableRow(children: <Widget>[
+                                                Text('Age group:', textAlign: TextAlign.center),
+                                                Text(
+                                                    'Statistical\nreference values:',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('5 - 9',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('10 - 14',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('15 - 19',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                            ]),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                ),
+                                style: ButtonStyle(
+                                    alignment: Alignment.centerRight),
+                                child: Text(
+                                    calculatedResults['CW_cardiac_work']!
+                                        .toStringAsFixed(0),
+                                    textAlign: TextAlign.end),
+                              ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(0.0),
+                            padding: const EdgeInsets.only(top: 6.0),
                             child: IconButton(
                               onPressed: () => showDialog<String>(
                                 context: context,
@@ -331,7 +680,8 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: EdgeInsets.all(6.0),
-                              child: Text("Work efficiency (SW\u{2060}/\u{2060}PVA):"),
+                              child: Text(
+                                  "Work efficiency\n(SW\u{2060}/\u{2060}PVA):"),
                             ),
                           ),
                           TableCell(
@@ -339,15 +689,65 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: Text(workEfficiencyInPercentString,
-                                  textAlign: TextAlign.end
-                                  // calculatedResults['Work_efficiency']!
-                                  // .toStringAsFixed(2)
-                                  ),
+                              child: TextButton(
+                                onPressed: () => showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        title: const Text(
+                                            "Reference values for \n\"Work efficiency\"\n(SW\u{2060}/\u{2060}PVA):"),
+                                        content: Table(
+                                            columnWidths: const <int,
+                                                TableColumnWidth>{
+                                              0: FixedColumnWidth(100),
+                                              1: FlexColumnWidth(),
+                                            },
+                                            defaultVerticalAlignment:
+                                            TableCellVerticalAlignment.middle,
+                                            children: <TableRow>[
+                                              TableRow(children: <Widget>[
+                                                Text('Age group:', textAlign: TextAlign.center),
+                                                Text(
+                                                    'Statistical\nreference values:',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('5 - 9',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('10 - 14',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('15 - 19',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                            ]),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                ),
+                                style: ButtonStyle(
+                                    alignment: Alignment.centerRight),
+                                child: Text(workEfficiencyInPercentString,
+                                    textAlign: TextAlign.end
+                                    // calculatedResults['Work_efficiency']!
+                                    // .toStringAsFixed(2)
+                                    ),
+                              ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(0.0),
+                            padding: const EdgeInsets.only(top: 6.0),
                             child: IconButton(
                               onPressed: () => showDialog<String>(
                                 context: context,
@@ -379,7 +779,7 @@ class DisplayOfAnalysis extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.all(6.0),
                               child: Text(
-                                  "Cardiac efficiency (PVA\u{2060}/\u{2060}Stroke\u{00A0}Volume,\u{00A0}mmHg):"),
+                                  "Cardiac efficiency\n(PVA\u{2060}/\u{2060}Stroke\u{00A0}Volume,\u{00A0}mmHg):"),
                             ),
                           ),
                           TableCell(
@@ -387,15 +787,65 @@ class DisplayOfAnalysis extends StatelessWidget {
                                 TableCellVerticalAlignment.middle,
                             child: Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: Text(
-                                  calculatedResults[
-                                          'reciprocal_cardiac_efficiency']!
-                                      .toStringAsFixed(0),
-                                  textAlign: TextAlign.end),
+                              child: TextButton(
+                                onPressed: () => showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        title: const Text(
+                                            "Reference values for \n\"Cardiac efficiency\"\n(PVA\u{2060}/\u{2060}Stroke\u{00A0}Volume,\u{00A0}mmHg):"),
+                                        content: Table(
+                                            columnWidths: const <int,
+                                                TableColumnWidth>{
+                                              0: FixedColumnWidth(100),
+                                              1: FlexColumnWidth(),
+                                            },
+                                            defaultVerticalAlignment:
+                                            TableCellVerticalAlignment.middle,
+                                            children: <TableRow>[
+                                              TableRow(children: <Widget>[
+                                                Text('Age group:', textAlign: TextAlign.center),
+                                                Text(
+                                                    'Statistical\nreference values:',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('5 - 9',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('10 - 14',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                              TableRow(children: <Widget>[
+                                                Text('15 - 19',textAlign: TextAlign.center),
+                                                Text('xyz',
+                                                    textAlign: TextAlign.center)
+                                              ]),
+                                            ]),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context, 'OK'),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                ),
+                                style: ButtonStyle(
+                                    alignment: Alignment.centerRight),
+                                child: Text(
+                                    calculatedResults[
+                                            'reciprocal_cardiac_efficiency']!
+                                        .toStringAsFixed(0),
+                                    textAlign: TextAlign.end),
+                              ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(0.0),
+                            padding: const EdgeInsets.only(top: 6.0),
                             child: IconButton(
                               onPressed: () => showDialog<String>(
                                 context: context,
@@ -463,199 +913,167 @@ class DisplayOfAnalysis extends StatelessWidget {
                                         children: const [
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("A"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("ESV/0 mmHg"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("B"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("EDV/0 mmHg"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("C"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("EDV/Pes"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("D"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("ESV/Pes"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("Pes"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text(
                                                   "End-systolic blood pressure"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("A–B"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("Diastolic filling"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("B–C"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text(
                                                   "Isovolumic contraction"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("C–D"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("Ejection"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("D–A"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child:
                                                   Text("Isovolumic relaxation"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("ESPVR"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text(
                                                   "End-systolic pressure–volume relation"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("Ees(sb)"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text(
                                                   "Left ventricular end-systolic elastance"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("V0"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text(
                                                   "Intersection ESPVR and x-axis"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("Ea"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("Arterial elastance"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("Epot"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("Potential energy"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("SW"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("Stroke work"),
                                             ),
                                           ]),
                                           TableRow(children: [
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child: Text("PVA"),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.all(6.0),
+                                              padding: EdgeInsets.all(6.0),
                                               child:
                                                   Text("Pressure–volume area"),
                                             ),
