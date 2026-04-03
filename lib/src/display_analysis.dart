@@ -174,17 +174,17 @@ class DisplayOfAnalysis extends StatelessWidget {
                                               ]),
                                               TableRow(children: <Widget>[
                                                 Text('5 - 9',textAlign: TextAlign.center),
-                                                Text('xyz',
+                                                Text('3.04±0.70',
                                                     textAlign: TextAlign.center)
                                               ]),
                                               TableRow(children: <Widget>[
                                                 Text('10 - 14',textAlign: TextAlign.center),
-                                                Text('xyz',
+                                                Text('2.32±0.54',
                                                     textAlign: TextAlign.center)
                                               ]),
                                               TableRow(children: <Widget>[
                                                 Text('15 - 19',textAlign: TextAlign.center),
-                                                Text('xyz',
+                                                Text('1.84±0.33',
                                                     textAlign: TextAlign.center)
                                               ]),
                                             ]),
