@@ -10,7 +10,7 @@ class HeartDataInput extends StatefulWidget {
   const HeartDataInput({super.key});
 
   @override
-  _HeartDataInputState createState() => _HeartDataInputState();
+  State<HeartDataInput> createState() => _HeartDataInputState();
 }
 
 class _HeartDataInputState extends State<HeartDataInput> {
@@ -204,7 +204,7 @@ class _HeartDataInputState extends State<HeartDataInput> {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
+                color: Colors.grey.withValues(alpha: 0.3),
                 spreadRadius: 5,
                 blurRadius: 5,
                 offset: const Offset(0, 7), // changes position of shadow
